@@ -54,7 +54,7 @@ class ProductSubscriptionResource extends Resource
                                 ->afterStateUpdated(function ($state, callable $set){
                                     $product = Product::find($state);
                                     $price = $product ? $product->price_per_person : 0;
-                                    $duration = $product ? $product->duration : 0;
+                                    $duration = $product ? $product->duration : '0 Jam';
 
                                     $set('price', $price);
                                     $set('duration', $duration);
@@ -101,7 +101,6 @@ class ProductSubscriptionResource extends Resource
 
                                 Forms\Components\TextInput::make('duration')
                                 ->required()
-                                ->numeric()
                                 ->readOnly()
                                 ->prefix('Month'),
 

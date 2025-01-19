@@ -90,12 +90,19 @@ class ProductResource extends Resource
                             }
                         }),
 
-                        Forms\Components\TextInput::make('duration')
+                        Forms\Components\Select::make('duration')
                         ->required()
-                        ->numeric()
-                        ->prefix('Month'),
+                        ->options([
+                            '1 Jam' => '1 Jam',
+                            '1 Hari' => '1 Hari',
+                            '1 Minggu' => '1 Minggu',
+                            '1 Bulan' => '1 Bulan',
+                            '1 Tahun' => '1 Tahun',
+                        ])
+                        ->placeholder('Pilih Durasi')
+                        ->prefix('Month '),
 
-                    ]),
+                        ]),
 
                 Fieldset::make('Additional')
                 ->schema([

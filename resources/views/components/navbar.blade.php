@@ -22,7 +22,7 @@
                     </li>
                 </ul>
                 <a href="{{route('front.check_booking')}}" class="flex items-center rounded-full border border-patungan-orange/10 bg-patungan-orange/10 h-[60px] px-9 gap-[6px]">
-                    <img src="{{asset('assets/images/icons/receipt-text-orange.svg') }}" class="w-6 flex shrink-0" alt="icon">
+                    <img src="{{asset('assets/images/icons/receipt-text-orange_1.svg') }}" class="w-6 flex shrink-0" alt="icon">
                     <span class="font-bold leading-5 text-patungan-orange">Pesanan Saya</span>
                 </a>
             </div>

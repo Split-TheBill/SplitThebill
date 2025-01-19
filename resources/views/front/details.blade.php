@@ -35,7 +35,7 @@
                                 <p class="font-extrabold text-2xl leading-[30px]">Rp {{number_format($product->price_per_person,0,',','.')}}<span class="font-semibold text-lg leading-[22px] text-patungan-grey">/person</span></p>
                                 <div class="flex items-center rounded-lg p-2 gap-1 bg-patungan-red/10">
                                     <img src="{{asset('assets/images/icons/clock-red.svg')}}" class="w-6 flex shrink-0" alt="icon">
-                                    <p class="font-bold leading-5 text-patungan-red">{{$product->duration}} Month</p>
+                                    <p class="font-bold leading-5 text-patungan-red">{{$product->duration}}</p>
                                 </div>
                             </div>
                             <hr class="border-patungan-border">
@@ -112,7 +112,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Durasi</p>
-                        <p class="font-bold text-xl leading-[25px]">{{$product->duration}} Month</p>
+                        <p class="font-bold text-xl leading-[25px]">{{$product->duration}}</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Group Capacity</p>

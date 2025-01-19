@@ -3,7 +3,7 @@
 
     <div class="flex flex-col min-h-screen w-full justify-center items-center bg-[linear-gradient(113.19deg,#E25520_0%,#A83279_100.41%)]">
         <div class="absolute w-full h-full overflow-hidden">
-            <img src="{{asset('assets/images/backgrounds/Full-bg.svg')}}" class="w-full h-full object-cover" alt="background">
+            <img src="{{asset('assets/images/backgrounds/Full-bg-1.svg')}}" class="w-full h-full object-cover" alt="background">
         </div>
         <main class="relative flex flex-col h-screen py-10 px-16 gap-8 items-center justify-between">
             <a href="index.html">
@@ -12,7 +12,7 @@
             <form action="{{route('front.check_booking_details')}}" method="POST" class="flex flex-col w-full max-w-[782px] items-center rounded-[64px] p-[52px] gap-8 bg-white">
                 @csrf
                 <div class="flex flex-col items-center text-center gap-6">
-                    <img src="{{asset('assets/images/icons/receipt-text-orange-fill.svg')}}" class="w-[62px] flex shrink-0" alt="icon">
+                    <img src="{{asset('assets/images/icons/receipt-text-orange-fill-1.svg')}}" class="w-[62px] flex shrink-0" alt="icon">
                     <h1 class="font-Grifter font-bold text-[32px] leading-[51px]">Lihat Pesanan Kamu</h1>
                     @if ($errors->any())
                     <div class="text-white font-bold py-3 px-10 rounded-full bg-patungan-orange">

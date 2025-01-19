@@ -97,7 +97,7 @@
                                 <p class="font-extrabold text-2xl leading-[30px]">Rp {{number_format($itemNewProduct->price_per_person,0,',','.')}}</p>
                                 <div class="flex items-center rounded-lg p-2 gap-1 bg-patungan-red/10">
                                     <img src="{{asset('assets/images/icons/clock-red.svg') }}" class="w-6 flex shrink-0" alt="icon">
-                                    <p class="font-bold leading-5 text-patungan-red">{{$itemNewProduct->duration}} month</p>
+                                    <p class="font-bold leading-5 text-patungan-red">{{$itemNewProduct->duration}}</p>
                                 </div>
                             </div>
                             <hr class="border-patungan-border">
@@ -118,7 +118,7 @@
             </div>
             <button class="flex items-center rounded-full border border-patungan-orange/10 bg-patungan-orange/10 h-[60px] px-9 gap-2 justify-center">
                 <span class="font-bold leading-5 text-patungan-orange">Lihat Semua</span>
-                <img src="{{asset('assets/images/icons/arrow-right-orange.svg') }}" class="w-6 flex shrink-0" alt="icon">
+                <img src="{{asset('assets/images/icons/arrow-right-orange-1.svg') }}" class="w-6 flex shrink-0" alt="icon">
             </button>
         </section>
     </section>
@@ -1072,5 +1072,6 @@
           // Start the slider interval after setting initial width
           setInterval(updateSlider, 2000);
         });
+        
     </script>
     @endpush

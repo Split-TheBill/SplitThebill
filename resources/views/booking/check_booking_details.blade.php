@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="flex items-center rounded-lg p-2 gap-1 bg-patungan-red/10">
                                     <img src="{{asset ('assets/images/icons/clock-red.svg')}}" class="w-6 flex shrink-0" alt="icon">
-                                    <p class="font-bold leading-5 text-patungan-red">{{$bookingDetails->product->duration}} month</p>
+                                    <p class="font-bold leading-5 text-patungan-red">{{$bookingDetails->product->duration}}</p>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-6">
@@ -106,7 +106,7 @@
                                         </div>
                                         <div class="flex items-center rounded-lg p-2 gap-1 bg-patungan-red/10">
                                             <img src="{{asset ('assets/images/icons/clock-red.svg')}}" class="w-6 flex shrink-0" alt="icon">
-                                            <p class="font-bold leading-5 text-patungan-red">{{$bookingDetails->product->duration}} month</p>
+                                            <p class="font-bold leading-5 text-patungan-red">{{$bookingDetails->product->duration}}</p>
                                         </div>
                                     </div>
                                     <div class="flex flex-col gap-4">
@@ -125,7 +125,7 @@
                                         </div>
                                         <div class="flex items-center justify-between">
                                             <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Durasi</p>
-                                            <p class="font-bold text-xl leading-[25px]">{{$bookingDetails->product->duration}} Month</p>
+                                            <p class="font-bold text-xl leading-[25px]">{{$bookingDetails->product->duration}}</p>
                                         </div>
                                         <div class="flex items-center justify-between">
                                             <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Group Capacity</p>
