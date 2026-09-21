@@ -1,1077 +1,289 @@
 @extends('layouts.master')
-@section ('content')
-    <x-navbar/>
-    <header class="flex flex-col items-center py-[100px] w-full max-w-[1280px] mx-auto px-16">
-        <div id="Badge" class="flex items-center w-fit rounded-full p-2 pr-6 gap-3 bg-patungan-black">
-            <img src="{{asset('assets/images/photos/Profiles.png') }}" class="h-9 flex shrink-0" alt="icon">
-            <p class="font-semibold leading-5 text-white"><span class="font-extrabold">16.500+</span> Users Has Joined 🔥 </p>
-        </div>
-        <h1 class="font-Grifter text-[62px] text-center mt-[42px] flex justify-center flex-wrap">
-            <span class="!block">Patungan Akun</span> 
-            <!-- animation from javascript -->
-            <span id="slider-container" class="text-nowrap !block overflow-hidden ml-6 relative z-10">
-                <span id="slider" class="absolute flex transition-all duration-500 z-10">
-                    <span class="bg-clip-text text-transparent bg-[linear-gradient(90deg,#E25520_0%,#E45687_100%)] whitespace-nowrap">Streaming,</span>
-                    <span class="bg-clip-text text-transparent bg-[linear-gradient(90deg,#E25520_0%,#E45687_100%)] whitespace-nowrap">Education,</span>
-                    <span class="bg-clip-text text-transparent bg-[linear-gradient(90deg,#E25520_0%,#E45687_100%)] whitespace-nowrap">Music,</span>
-                </span>
-            </span> 
-            <span class="!block w-full">Hemat Tanpa Batas</span>
-        </h1>
-        <p class="font-medium text-lg text-center text-patungan-grey">
-            Collective premium subscription purchases for affordability. <br>
-            Group subscription for discounted premium access
-        </p>
-        <div class="flex items-center justify-center gap-6 mt-16">
-            <a href="#" class="flex items-center rounded-full h-[60px] w-fit px-9 gap-[6px] bg-patungan-orange">
-                <span class="font-bold text-lg leading-5 text-white">Pesan Sekarang</span>
-                <img src="{{asset('assets/images/icons/arrow-right-white.svg') }}" class="w-6 flex shrink-0" alt="icon">
-            </a>
-            <a href="#" class="flex items-center rounded-full h-[60px] w-fit px-9 gap-[6px] bg-white border border-patungan-border">
-                <span class="font-bold text-lg leading-5">Lihat Cara Pesan</span>
-            </a>
-        </div>
-    </header>
-    <section id="Stats" class="w-full flex justify-center bg-patungan-black">
-        <div class="flex items-center gap-8 w-full max-w-[1280px] px-16 py-[42px]">
-            <div class="flex flex-col w-[222px] gap-[6px] text-center">
-                <p class="font-Grifter font-bold text-[42px] leading-[44px] text-white">2.209+</p>
-                <p class="font-medium text-xl leading-[25px] text-patungan-violet">Total User</p>
-            </div>
-            <img src="{{asset('assets/images/icons/star-divider-white.svg') }}" class="w-6 flex shrink-0" alt="icon">
-            <div class="flex flex-col w-[222px] gap-[6px] text-center">
-                <p class="font-Grifter font-bold text-[42px] leading-[44px] text-white">9/10</p>
-                <p class="font-medium text-xl leading-[25px] text-patungan-violet">Happy Client</p>
-            </div>
-            <img src="{{asset('assets/images/icons/star-divider-white.svg') }}" class="w-6 flex shrink-0" alt="icon">
-            <div class="flex flex-col w-[222px] gap-[6px] text-center">
-                <p class="font-Grifter font-bold text-[42px] leading-[44px] text-white">12</p>
-                <p class="font-medium text-xl leading-[25px] text-patungan-violet">Total Services</p>
-            </div>
-            <img src="{{asset('assets/images/icons/star-divider-white.svg') }}" class="w-6 flex shrink-0" alt="icon">
-            <div class="flex flex-col w-[222px] gap-[6px] text-center">
-                <p class="font-Grifter font-bold text-[42px] leading-[44px] text-white">4.920+</p>
-                <p class="font-medium text-xl leading-[25px] text-patungan-violet">Total Transactions</p>
-            </div>
-        </div>
-    </section>
-    <section id="Products" class="relative w-full overflow-hidden">
-        <div class="Background-Effect absolute w-full h-full overflow-hidden">
-            <img src="{{asset('assets/images/backgrounds/Ellipse-top.svg') }}" class="absolute top-0 -right-[337px] z-0" alt="eclipse bg">
-            <img src="{{asset('assets/images/backgrounds/Ellipse-bottom.svg') }}" class="absolute bottom-0 -left-[283px] z-0" alt="eclipse bg">
-        </div>
-        <section class="Content relative flex flex-col w-full max-w-[1280px] px-16 mx-auto gap-8 py-[100px]">
-            <div class="flex items-center justify-between">
-                <div class="flex flex-col gap-5">
-                    <h2 class="font-bold text-xl leading-[25px] text-patungan-red">Our Services</h2>
-                    <p class="font-Grifter font-bold text-4xl leading-[37px]">Beragam Account bisa kamu nikmati 🥳 </p>
-                </div>
-                <a href="#" class="flex items-center rounded-full h-[60px] w-fit py-3 px-9 gap-[6px] bg-white border border-patungan-border">
-                    <span class="font-bold text-lg leading-5">Semua Product</span>
-                    <img src="{{asset('assets/images/icons/arrow-circle-down-black.svg') }}" class="w-6 flex shrink-0" alt="">
-                </a>
-            </div>
-            <div class="grid grid-cols-3 gap-6">
 
-                @forelse($newProducts as $itemNewProduct)
-                <div class="product-card flex flex-col rounded-[32px] overflow-hidden bg-white">
-                    <div class="w-full h-[180px] flex shrink-0 bg-[#D9D9D9]">
-                        <img src="{{Storage::url($itemNewProduct->thumbnail)}}" class="w-full h-full object-cover" alt="thumbnails">
-                    </div>
-                    <div class="flex flex-col p-6 gap-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-[62px] h-[62px] flex shrink-0 rounded-xl overflow-hidden">
-                                <img src="{{Storage::url($itemNewProduct->photo)}}" class="w-full h-full object-contain object-center" alt="icon">
-                            </div>
-                            <div>
-                                <p class="font-bold text-xl leading-[25px]">{{$itemNewProduct->name}}</p>
-                                <div class="flex items-center gap-[2px] mt-[2px]">
-                                    <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="icon">
-                                    <p class="font-bold text-lg leading-[22px]">4.9</p>
-                                    <p class="font-semibold leading-[20px] text-patungan-grey">(2120 Reviews)</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-col rounded-3xl border border-patungan-border p-4 gap-4">
-                            <div class="flex items-center justify-between">
-                                <p class="font-extrabold text-2xl leading-[30px]">Rp {{number_format($itemNewProduct->price_per_person,0,',','.')}}</p>
-                                <div class="flex items-center rounded-lg p-2 gap-1 bg-patungan-red/10">
-                                    <img src="{{asset('assets/images/icons/clock-red.svg') }}" class="w-6 flex shrink-0" alt="icon">
-                                    <p class="font-bold leading-5 text-patungan-red">{{$itemNewProduct->duration}}</p>
-                                </div>
-                            </div>
-                            <hr class="border-patungan-border">
-                            <div class="flex items-center gap-2">
-                                <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                                <p class="font-medium text-lg leading-[22px] text-patungan-grey">Lebih hemat 50%</p>
-                            </div>
-                        </div>
-                        <a href="{{route ('front.details', $itemNewProduct->slug)}}" class="flex items-center rounded-full h-[60px] px-9 w-full gap-[6px] bg-patungan-orange justify-center">
-                            <span class="font-bold text-lg leading-5 text-white">Pesan Sekarang</span>
-                        </a>
-                    </div>
+@section('title', 'Split TheBill — Langganan Premium Lebih Hemat')
+
+@section('content')
+    @php
+        $steps = [
+            [
+                'number' => '01',
+                'title' => 'Pilih layanan',
+                'description' => 'Temukan layanan premium yang ingin kamu nikmati bersama dengan harga yang lebih ringan.',
+                'image' => 'assets/images/thumbnails/select-product.png',
+            ],
+            [
+                'number' => '02',
+                'title' => 'Lengkapi pembayaran',
+                'description' => 'Isi data dengan benar, transfer sesuai total pesanan, lalu unggah bukti pembayaran.',
+                'image' => 'assets/images/thumbnails/payment-process.png',
+            ],
+            [
+                'number' => '03',
+                'title' => 'Bergabung ke grup',
+                'description' => 'Setelah pembayaran diverifikasi, kamu akan masuk ke grup dan menerima informasi akses.',
+                'image' => 'assets/images/thumbnails/join-group.png',
+            ],
+        ];
+
+        $testimonials = [
+            ['name' => 'Nabila Reyna', 'photo' => 'photo-1.png', 'text' => 'Prosesnya jelas dan cepat. Langganan jadi jauh lebih hemat tanpa perlu bingung mengatur grup sendiri.'],
+            ['name' => 'Bapak Budi', 'photo' => 'photo-2.png', 'text' => 'Status pesanan mudah dicek dan semua informasi pembayaran tersusun rapi. Pengalaman yang sangat praktis.'],
+            ['name' => 'Ibu Budi', 'photo' => 'photo-3.png', 'text' => 'Pilihan layanannya lengkap dan alur pesan mudah diikuti, bahkan dari ponsel. Sangat membantu untuk berhemat.'],
+            ['name' => 'Murayiki Bazz', 'photo' => 'photo-4.png', 'text' => 'Tidak perlu lagi membayar harga penuh. Informasi grup dan progres pesanan juga transparan.'],
+            ['name' => 'Bimore Atreidess', 'photo' => 'photo-5.png', 'text' => 'Mulai dari memilih produk sampai mengunggah bukti transfer terasa sederhana dan tidak berbelit-belit.'],
+            ['name' => 'Unil Utami', 'photo' => 'photo-6.png', 'text' => 'Harga lebih ramah di kantong dan layanan pelanggan responsif saat saya membutuhkan bantuan.'],
+        ];
+
+        $faqs = [
+            ['question' => 'Kapan langganan mulai aktif?', 'answer' => 'Langganan diproses setelah bukti pembayaran berhasil diverifikasi. Kamu dapat memantau statusnya kapan saja melalui menu Pesanan Saya.'],
+            ['question' => 'Bagaimana cara memperpanjang langganan?', 'answer' => 'Pilih kembali layanan yang sama dan lakukan pemesanan baru sebelum masa langganan aktif berakhir agar akses tetap berlanjut.'],
+            ['question' => 'Metode pembayaran apa yang tersedia?', 'answer' => 'Saat ini pembayaran dilakukan melalui transfer bank yang tersedia pada halaman pembayaran. Simpan bukti transfer untuk proses verifikasi.'],
+            ['question' => 'Bagaimana jika akun langganan bermasalah?', 'answer' => 'Periksa pesan terbaru pada detail pesanan terlebih dahulu. Jika masalah berlanjut, hubungi tim dukungan dengan menyertakan kode booking.'],
+            ['question' => 'Apakah data pribadi saya aman?', 'answer' => 'Kami hanya meminta data yang diperlukan untuk memproses pesanan. Jangan pernah membagikan kode booking kepada pihak yang tidak berkepentingan.'],
+            ['question' => 'Bagaimana jika grup belum penuh?', 'answer' => 'Status dan jumlah anggota dapat dipantau melalui detail pesanan. Informasi lanjutan akan diberikan melalui pesan pada grup pesananmu.'],
+        ];
+    @endphp
+
+    <x-navbar />
+
+    <main id="main-content">
+        <header class="relative isolate overflow-hidden">
+            <div class="motion-glow absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(255,12,129,0.14),transparent_36%),radial-gradient(circle_at_bottom_left,rgba(226,85,32,0.12),transparent_32%)]"></div>
+            <div class="site-shell flex min-h-[620px] flex-col items-center justify-center py-16 text-center sm:min-h-[680px] sm:py-20 lg:min-h-[720px]">
+                <div class="reveal-on-scroll inline-flex max-w-full items-center gap-3 rounded-full bg-patungan-black px-4 py-2 text-left text-sm font-semibold text-white sm:px-5 sm:text-base">
+                    <img src="{{ asset('assets/images/photos/Profiles.png') }}" class="motion-float h-8 w-auto shrink-0 sm:h-9" alt="">
+                    <span><strong>16.500+</strong> pengguna sudah bergabung 🔥</span>
                 </div>
-                @empty
-                <p>Belum ada data terbaru</p>
-                @endforelse
-                
+
+                <h1 class="reveal-on-scroll reveal-delay-1 mt-8 max-w-5xl font-Grifter text-[clamp(2.6rem,8vw,5rem)] font-bold leading-[1.04] tracking-[-0.03em] sm:mt-10">
+                    Patungan akun premium,
+                    <span class="bg-gradient-to-r from-[#E25520] to-[#E45687] bg-clip-text text-transparent">hemat tanpa batas</span>
+                </h1>
+
+                <p class="reveal-on-scroll reveal-delay-2 mt-6 max-w-2xl text-base font-medium leading-7 text-patungan-grey sm:text-lg sm:leading-8">
+                    Nikmati layanan streaming, musik, dan edukasi bersama. Alur pemesanan transparan, biaya lebih ringan, dan status mudah dipantau.
+                </p>
+
+                <div class="reveal-on-scroll reveal-delay-3 mt-9 flex w-full max-w-lg flex-col justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4">
+                    <a href="#Products" class="btn-primary">
+                        Lihat Layanan
+                        <img src="{{ asset('assets/images/icons/arrow-right-white.svg') }}" class="h-5 w-5" alt="">
+                    </a>
+                    <a href="#How-It-Works" class="btn-secondary">Pelajari Cara Pesan</a>
+                </div>
             </div>
-            <button class="flex items-center rounded-full border border-patungan-orange/10 bg-patungan-orange/10 h-[60px] px-9 gap-2 justify-center">
-                <span class="font-bold leading-5 text-patungan-orange">Lihat Semua</span>
-                <img src="{{asset('assets/images/icons/arrow-right-orange-1.svg') }}" class="w-6 flex shrink-0" alt="icon">
-            </button>
+        </header>
+
+        <section aria-label="Statistik Split TheBill" class="reveal-on-scroll bg-patungan-black text-white">
+            <div class="site-shell grid grid-cols-2 gap-px bg-white/10 py-1 sm:grid-cols-4">
+                @foreach ([['2.209+', 'Total pengguna'], ['9/10', 'Pelanggan puas'], ['12', 'Layanan'], ['4.920+', 'Transaksi']] as [$value, $label])
+                    <div class="flex flex-col items-center bg-patungan-black px-3 py-8 text-center sm:py-10">
+                        <strong class="font-Grifter text-3xl sm:text-4xl">{{ $value }}</strong>
+                        <span class="mt-2 text-sm font-semibold text-patungan-violet sm:text-base">{{ $label }}</span>
+                    </div>
+                @endforeach
+            </div>
         </section>
-    </section>
-    <section id="How-It-Works" class="flex py-[100px] w-full max-w-[1280px] mx-auto px-16 gap-6 justify-between">
-        <div class="relative flex w-full h-[inherit]">
-            <div class="sticky top-0 flex flex-col w-full max-w-[510px] gap-[54px] h-fit">
-                <div class="flex flex-col gap-8">
-                    <div class="flex flex-col gap-5">
-                        <h2 class="font-bold text-xl leading-[25px] text-patungan-red">How it Works</h2>
-                        <p class="font-Grifter font-bold text-4xl leading-[37px]">Prosesnya Mudah & Cepat</p>
+
+        <section id="Products" class="section-space relative overflow-hidden">
+            <div class="absolute -right-40 top-0 -z-10 h-80 w-80 rounded-full bg-pink-200/30 blur-3xl"></div>
+            <div class="site-shell">
+                <div class="reveal-on-scroll flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                    <div class="max-w-2xl">
+                        <p class="section-kicker">Layanan kami</p>
+                        <h2 class="section-title mt-3">Beragam akun premium untuk dinikmati bersama</h2>
                     </div>
-                    <p class="font-medium text-lg text-patungan-grey">Kami berkomitmen memberikan layanan terbaik dan pengalaman menarik bagi setiap pelanggan setia kami.</p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">Data pribadi aman</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">beragam pembayaran</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">Akun Resmi & legal</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">24/7 Customer services</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">Lebih hemat 50%</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">Dan masih banyak lainnya</p>
-                        </div>
-                    </div>
+                    <a href="{{ route('front.check_booking') }}" class="font-bold text-patungan-grey transition hover:text-patungan-black">Sudah memesan? Cek status →</a>
                 </div>
-                <a href="#" class="flex items-center rounded-full h-[60px] w-fit px-9 gap-[6px] bg-patungan-orange">
-                    <span class="font-bold text-lg leading-5 text-white">Pesan Sekarang</span>
-                    <img src="{{asset('assets/images/icons/arrow-right-white.svg') }}" class="w-6 flex shrink-0" alt="icon">
-                </a>
+
+                @if ($newProducts->isEmpty())
+                    <div class="surface-card motion-card reveal-on-scroll reveal-delay-1 mt-10 flex flex-col items-center px-6 py-14 text-center sm:px-10">
+                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-patungan-bg-grey">
+                            <img src="{{ asset('assets/images/icons/receipt-text-black.svg') }}" class="h-8 w-8" alt="">
+                        </div>
+                        <h3 class="mt-5 text-xl font-bold">Layanan sedang disiapkan</h3>
+                        <p class="mt-2 max-w-lg leading-7 text-patungan-grey">Layanan baru sedang kami siapkan. Silakan kembali lagi dalam waktu dekat.</p>
+                    </div>
+                @else
+                    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        @foreach ($newProducts->take(6) as $product)
+                            <article class="surface-card motion-card reveal-on-scroll flex min-w-0 flex-col overflow-hidden">
+                                <a href="{{ route('front.details', $product) }}" class="block aspect-[16/9] overflow-hidden bg-[#D9D9D9]">
+                                    <img src="{{ $product->thumbnail_url }}" class="h-full w-full object-cover transition duration-300 hover:scale-105" alt="{{ $product->name }}">
+                                </a>
+                                <div class="flex flex-1 flex-col p-5 sm:p-6">
+                                    <div class="flex min-w-0 items-center gap-3">
+                                        <div class="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-patungan-bg-grey">
+                                            <img src="{{ $product->photo_url }}" class="h-full w-full object-contain" alt="">
+                                        </div>
+                                        <div class="min-w-0">
+                                            <h3 class="truncate text-xl font-bold">{{ $product->name }}</h3>
+                                            <p class="mt-1 text-sm font-semibold text-patungan-grey">{{ $product->duration }} · {{ $product->capacity }} orang</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="my-6 rounded-2xl border border-patungan-border bg-patungan-bg-grey p-4">
+                                        <p class="text-sm font-semibold text-patungan-grey">Mulai dari</p>
+                                        <p class="mt-1 text-2xl font-extrabold">Rp {{ number_format($product->price_per_person, 0, ',', '.') }}</p>
+                                        <p class="mt-2 flex items-center gap-2 text-sm font-semibold text-patungan-grey">
+                                            <img src="{{ asset('assets/images/icons/verify-green.svg') }}" class="h-4 w-4" alt="">
+                                            Harga per orang
+                                        </p>
+                                    </div>
+
+                                    <a href="{{ route('front.details', $product) }}" class="btn-primary mt-auto w-full">Lihat Detail</a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+                @endif
             </div>
-        </div>
-        <div class="flex flex-col w-full h-fit max-w-[560px] gap-8">
-            <div class="card flex flex-col w-full rounded-[32px] bg-white overflow-hidden">
-                <div class="flex flex-col gap-6 p-6">
-                    <div class="flex items-center gap-4">
-                        <span class="flex w-11 shrink-0 rounded-[100px] h-[56px] bg-patungan-orange/10 justify-center items-center font-bold text-[32px] leading-[40px] text-patungan-orange">
-                            1
+        </section>
+
+        <section id="How-It-Works" class="section-space bg-white/55">
+            <div class="site-shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+                <div class="reveal-on-scroll lg:sticky lg:top-28 lg:self-start">
+                    <p class="section-kicker">Cara pesan</p>
+                    <h2 class="section-title mt-3">Mudah dari awal sampai akses diterima</h2>
+                    <p class="mt-5 max-w-xl text-base font-medium leading-7 text-patungan-grey sm:text-lg sm:leading-8">
+                        Setiap tahap dirancang agar informasi harga, pembayaran, dan status grup mudah dipahami.
+                    </p>
+
+                    <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                        @foreach (['Data pribadi aman', 'Pembayaran transparan', 'Akun resmi & legal', 'Status mudah dipantau', 'Lebih hemat', 'Dukungan pelanggan'] as $benefit)
+                            <p class="flex items-center gap-2 font-semibold text-patungan-grey">
+                                <img src="{{ asset('assets/images/icons/verify-green.svg') }}" class="h-5 w-5 shrink-0" alt="">
+                                {{ $benefit }}
+                            </p>
+                        @endforeach
+                    </div>
+
+                    <a href="#Products" class="btn-primary mt-8 w-full sm:w-auto">Mulai Pilih Layanan</a>
+                </div>
+
+                <div class="grid gap-6">
+                    @foreach ($steps as $step)
+                        <article class="surface-card motion-card reveal-on-scroll grid overflow-hidden sm:grid-cols-[1fr_220px]">
+                            <div class="p-6 sm:p-8">
+                                <span class="inline-flex h-12 min-w-12 items-center justify-center rounded-full bg-patungan-black px-3 font-Grifter text-lg text-white">{{ $step['number'] }}</span>
+                                <h3 class="mt-5 text-2xl font-bold">{{ $step['title'] }}</h3>
+                                <p class="mt-3 leading-7 text-patungan-grey">{{ $step['description'] }}</p>
+                            </div>
+                            <div class="h-52 overflow-hidden bg-patungan-bg-grey sm:h-full sm:min-h-64">
+                                <img src="{{ asset($step['image']) }}" class="motion-float h-full w-full object-cover object-top" alt="Ilustrasi {{ strtolower($step['title']) }}">
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <section id="Payment-Method" class="section-space">
+            <div class="site-shell reveal-on-scroll text-center">
+                <p class="section-kicker">Metode pembayaran</p>
+                <h2 class="section-title mt-3">Transfer dari bank dan dompet digital favoritmu</h2>
+                <div class="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-semibold text-patungan-grey sm:text-base">
+                    @foreach (['Transfer bank', 'Virtual account', 'Dompet digital'] as $method)
+                        <span class="flex items-center gap-2">
+                            <img src="{{ asset('assets/images/icons/verify-green.svg') }}" class="h-5 w-5" alt="">
+                            {{ $method }}
                         </span>
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">Select Product</p>
-                    </div>
-                    <p class="font-medium text-lg leading-8 text-patungan-grey">Pilih layanan langganan yang ingin Anda patungi. Kami menyediakan berbagai pilihan seperti Netflix, Spotify, dan Disney+ dengan harga terjangkau</p>
+                    @endforeach
                 </div>
-                <div class="flex w-full h-[232px] overflow-hidden">
-                    <img src="{{asset('assets/images/thumbnails/select-product.png') }}" class="w-full h-full object-cover object-top" alt="icon">
+                <div class="surface-card media-well motion-card reveal-on-scroll reveal-delay-1 mx-auto mt-9 max-w-5xl overflow-hidden p-4 sm:p-8">
+                    <img src="{{ asset('assets/images/thumbnails/supported-payments.png') }}" class="motion-float mx-auto h-auto w-full object-contain" alt="Bank dan metode pembayaran yang didukung">
                 </div>
             </div>
-            <div class="card flex flex-col w-full rounded-[32px] bg-white overflow-hidden">
-                <div class="flex flex-col gap-6 p-6">
-                    <div class="flex items-center gap-4">
-                        <span class="flex w-11 shrink-0 rounded-[100px] h-[56px] bg-patungan-orange/10 justify-center items-center font-bold text-[32px] leading-[40px] text-patungan-orange">
-                            2
-                        </span>
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">Payment Procces</p>
-                    </div>
-                    <p class="font-medium text-lg leading-8 text-patungan-grey">Lakukan pembayaran sesuai nominal yang ditentukan. Anda bisa bergabung dengan grup patungan bersama teman atau pengguna lain.</p>
+        </section>
+
+        <section id="Happy-Customer" class="section-space bg-white/55">
+            <div class="site-shell">
+                <div class="reveal-on-scroll mx-auto max-w-3xl text-center">
+                    <p class="section-kicker">Cerita pelanggan</p>
+                    <h2 class="section-title mt-3">Pengalaman hemat yang terasa lebih sederhana</h2>
                 </div>
-                <div class="flex w-full h-[232px] overflow-hidden">
-                    <img src="{{asset('assets/images/thumbnails/payment-process.png') }}" class="w-full h-full object-cover object-top" alt="icon">
-                </div>
-            </div>
-            <div class="card flex flex-col w-full rounded-[32px] bg-white overflow-hidden">
-                <div class="flex flex-col gap-6 p-6">
-                    <div class="flex items-center gap-4">
-                        <span class="flex w-11 shrink-0 rounded-[100px] h-[56px] bg-patungan-orange/10 justify-center items-center font-bold text-[32px] leading-[40px] text-patungan-orange">
-                            3
-                        </span>
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">Join Group</p>
-                    </div>
-                    <p class="font-medium text-lg leading-8 text-patungan-grey">Setelah pembayaran, Anda akan dimasukkan ke dalam grup patungan sesuai layanan yang dipilih. Nikmati akses layanan bersama dengan biaya lebih hemat.</p>
-                </div>
-                <div class="flex w-full h-[232px] overflow-hidden">
-                    <img src="{{asset('assets/images/thumbnails/join-group.png') }}" class="w-full h-full object-cover object-top" alt="icon">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="Payment-Method" class="bg-[linear-gradient(69.16deg,#FFFFFF_0.82%,rgba(255,255,255,0)_52.97%)]">
-        <div class="Content flex flex-col py-[100px] w-full max-w-[1280px] mx-auto px-16 gap-9">
-            <div class="flex flex-col items-center text-center">
-                <div class="flex flex-col gap-5">
-                    <h2 class="font-bold text-xl leading-[25px] text-patungan-red">Payment Methods</h2>
-                    <p class="font-Grifter font-bold text-4xl leading-[37px]">Beragam Metode pembayaran</p>
-                    <div class="flex items-center justify-center gap-6">
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">Bank Transfer</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">Virtual Account</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="{{asset('assets/images/icons/verify-green.svg') }}" class="w-[18px] flex shrink-0" alt="icon">
-                            <p class="font-medium text-lg leading-[22px] text-patungan-grey">Digital Wallet</p>
-                        </div>
-                    </div>
+
+                <div class="reveal-on-scroll reveal-delay-1 mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($testimonials as $testimonial)
+                        <figure class="surface-card motion-card flex h-full flex-col p-6 sm:p-7">
+                            <div class="flex items-center gap-3">
+                                <img src="{{ asset('assets/images/photos/' . $testimonial['photo']) }}" class="h-12 w-12 rounded-full object-cover" alt="Foto {{ $testimonial['name'] }}">
+                                <figcaption>
+                                    <p class="font-bold">{{ $testimonial['name'] }}</p>
+                                    <p class="text-sm font-semibold text-patungan-grey">Pelanggan Split TheBill</p>
+                                </figcaption>
+                            </div>
+                            <blockquote class="mt-6 flex-1 leading-7">“{{ $testimonial['text'] }}”</blockquote>
+                            <div class="mt-6 flex" aria-label="5 dari 5 bintang">
+                                @for ($star = 0; $star < 5; $star++)
+                                    <img src="{{ asset('assets/images/icons/Star.svg') }}" class="h-5 w-5" alt="">
+                                @endfor
+                            </div>
+                        </figure>
+                    @endforeach
                 </div>
             </div>
-            <div class="flex w-full max-w-[1000px] mx-auto overflow-hidden">
-                <img src="{{asset('assets/images/thumbnails/supported-payments.png') }}" class="w-full h-full object-contain object-center" alt="payments">
-            </div>
-        </div>
-    </section>
-    <section id="Happy-Customer" class="py-[100px] bg-[linear-gradient(180deg,rgba(255,255,255,0.5)_50%,rgba(243,239,245,0)_100%)]">
-        <div class="flex flex-col gap-5 text-center px-16">
-            <h2 class="font-bold text-xl leading-[25px] text-patungan-red">Happy Customers</h2>
-            <p class="font-Grifter font-bold text-4xl leading-[37px]">Happy Customer Feedback on Our Services</p>
-        </div>
-        <div id="Card-Slider" class="relative flex flex-col gap-6 mt-[30px] overflow-hidden">
-            <div id="Top-Slider" class="group flex flex-nowrap flex-row">
-                <div class="flex flex-row w-max gap-6 flex-nowrap animate-[slide_50s_linear_infinite] pl-6">
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-1.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Nabila Reyna</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Patungan akun di sini terpercaya, gak nyesel! Netflix dan Disney+ lancar jaya, harga terjangkau pula!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-2.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Bapak Budi</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Hemat banget patungan akun di sini! Nonton Netflix dan Spotify jadi lebih terjangkau. Proses cepat dan tanpa ribet!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-3.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Ibu Budi</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">“Layanan patungan akun terbaik! Bisa langganan Netflix dan Disney+ jadi lebih murah. Proses mudah dan aman, rekomendasi banget!”</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-4.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Murayiki Bazz</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Website ini bikin langganan lebih ringan di kantong. Langsung bisa akses Disney+, Netflix, dan lainnya. Top deh!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-5.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Bimore Atreidess</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Layanan top! Dulu nonton Netflix mahal, sekarang lebih hemat dengan patungan akun. Proses gampang dan cepat!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-6.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Unil Utami</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Bisa nikmatin Spotify dan Disney+ murah banget! Patungan di sini bikin semua jadi mudah dan terpercaya."</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-7.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Allison Suzu</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Solusi buat yang mau langganan akun premium murah. Proses cepat dan aman, Netflix dan Disney+ lancar!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
+        </section>
+
+        <section id="FAQ" class="section-space">
+            <div class="site-shell">
+                <div class="reveal-on-scroll mx-auto max-w-3xl text-center">
+                    <p class="section-kicker">Pertanyaan umum</p>
+                    <h2 class="section-title mt-3">Jawaban singkat sebelum kamu mulai</h2>
                 </div>
-                <div class="flex flex-row w-max gap-6 flex-nowrap animate-[slide_50s_linear_infinite] pl-6">
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-1.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Nabila Reyna</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Patungan akun di sini terpercaya, gak nyesel! Netflix dan Disney+ lancar jaya, harga terjangkau pula!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-2.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Bapak Budi</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Hemat banget patungan akun di sini! Nonton Netflix dan Spotify jadi lebih terjangkau. Proses cepat dan tanpa ribet!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-3.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Ibu Budi</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">“Layanan patungan akun terbaik! Bisa langganan Netflix dan Disney+ jadi lebih murah. Proses mudah dan aman, rekomendasi banget!”</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-4.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Murayiki Bazz</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Website ini bikin langganan lebih ringan di kantong. Langsung bisa akses Disney+, Netflix, dan lainnya. Top deh!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-5.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Bimore Atreidess</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Layanan top! Dulu nonton Netflix mahal, sekarang lebih hemat dengan patungan akun. Proses gampang dan cepat!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-6.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Unil Utami</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Bisa nikmatin Spotify dan Disney+ murah banget! Patungan di sini bikin semua jadi mudah dan terpercaya."</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-7.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Allison Suzu</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Solusi buat yang mau langganan akun premium murah. Proses cepat dan aman, Netflix dan Disney+ lancar!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="reveal-on-scroll reveal-delay-1 mx-auto mt-10 grid max-w-5xl gap-4 lg:grid-cols-2">
+                    @foreach ($faqs as $index => $faq)
+                        <details class="group surface-card motion-card overflow-hidden" @if ($index === 0) open @endif>
+                            <summary class="flex cursor-pointer list-none items-start justify-between gap-4 p-5 font-bold sm:p-6">
+                                <span class="flex gap-3">
+                                    <span class="text-patungan-grey">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                                    <span>{{ $faq['question'] }}</span>
+                                </span>
+                                <span class="mt-0.5 text-xl transition group-open:rotate-45" aria-hidden="true">+</span>
+                            </summary>
+                            <p class="px-5 pb-5 pl-[3.75rem] leading-7 text-patungan-grey sm:px-6 sm:pb-6 sm:pl-[4.25rem]">{{ $faq['answer'] }}</p>
+                        </details>
+                    @endforeach
                 </div>
             </div>
-            <div id="Bottom-Slider" class="group flex flex-nowrap flex-row">
-                <div class="flex flex-row w-max gap-6 flex-nowrap animate-[slideToR_50s_linear_infinite] pr-6">
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-1.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Nabila Reyna</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Patungan akun di sini terpercaya, gak nyesel! Netflix dan Disney+ lancar jaya, harga terjangkau pula!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-2.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Bapak Budi</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Hemat banget patungan akun di sini! Nonton Netflix dan Spotify jadi lebih terjangkau. Proses cepat dan tanpa ribet!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-3.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Ibu Budi</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">“Layanan patungan akun terbaik! Bisa langganan Netflix dan Disney+ jadi lebih murah. Proses mudah dan aman, rekomendasi banget!”</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-4.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Murayiki Bazz</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Website ini bikin langganan lebih ringan di kantong. Langsung bisa akses Disney+, Netflix, dan lainnya. Top deh!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-5.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Bimore Atreidess</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Layanan top! Dulu nonton Netflix mahal, sekarang lebih hemat dengan patungan akun. Proses gampang dan cepat!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-6.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Unil Utami</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Bisa nikmatin Spotify dan Disney+ murah banget! Patungan di sini bikin semua jadi mudah dan terpercaya."</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-7.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Allison Suzu</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Solusi buat yang mau langganan akun premium murah. Proses cepat dan aman, Netflix dan Disney+ lancar!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white bg-white/60 py-12 sm:py-14">
+        <div class="site-shell reveal-on-scroll">
+            <div class="grid gap-10 md:grid-cols-[1.25fr_0.75fr_0.75fr]">
+                <div class="max-w-md">
+                    <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="h-10 w-auto" alt="Split TheBill">
+                    <p class="mt-5 leading-7 text-patungan-grey">Berbagi biaya langganan premium dengan alur yang lebih mudah, transparan, dan terjangkau.</p>
                 </div>
-                <div class="flex flex-row w-max gap-6 flex-nowrap animate-[slideToR_50s_linear_infinite] pr-6">
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-1.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Nabila Reyna</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Patungan akun di sini terpercaya, gak nyesel! Netflix dan Disney+ lancar jaya, harga terjangkau pula!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-2.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Bapak Budi</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Hemat banget patungan akun di sini! Nonton Netflix dan Spotify jadi lebih terjangkau. Proses cepat dan tanpa ribet!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-3.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Ibu Budi</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">“Layanan patungan akun terbaik! Bisa langganan Netflix dan Disney+ jadi lebih murah. Proses mudah dan aman, rekomendasi banget!”</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-4.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Murayiki Bazz</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Website ini bikin langganan lebih ringan di kantong. Langsung bisa akses Disney+, Netflix, dan lainnya. Top deh!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-5.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Bimore Atreidess</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Layanan top! Dulu nonton Netflix mahal, sekarang lebih hemat dengan patungan akun. Proses gampang dan cepat!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-6.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Unil Utami</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Bisa nikmatin Spotify dan Disney+ murah banget! Patungan di sini bikin semua jadi mudah dan terpercaya."</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col w-[322px] h-full shrink-0 rounded-3xl p-6 gap-6 bg-white">
-                        <div class="flex items-center gap-3">
-                            <div class="flex w-16 h-16 rounded-full overflow-hidden shrink-0">
-                                <img src="{{asset('assets/images/photos/photo-7.png') }}" class="w-full h-full object-cover" alt="photos">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-lg leading-[22px]">Allison Suzu</p>
-                                <p class="font-semibold leading-5 text-patungan-grey">Netflix Subscription</p>
-                            </div>
-                        </div>
-                        <hr class="border-patungan-border">
-                        <div class="flex flex-col gap-6 justify-between h-full">
-                            <p class="font-semibold leading-[28px]">"Solusi buat yang mau langganan akun premium murah. Proses cepat dan aman, Netflix dan Disney+ lancar!"</p>
-                            <div class="flex items-center gap-[2px]">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                                <img src="{{asset('assets/images/icons/Star.svg') }}" class="w-6 flex shrink-0" alt="star">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="Foreground" class="absolute bottom-0 w-full h-[457px] flex items-end justify-center bg-[linear-gradient(180deg,rgba(245,243,246,0)_0%,#F5F3F6_100%)]">
-                <a href="#" class="flex items-center rounded-full h-[60px] w-fit px-9 gap-[6px] bg-patungan-orange">
-                    <span class="font-bold text-lg leading-5 text-white">Pesan Sekarang</span>
-                    <img src="{{asset('assets/images/icons/arrow-right-white.svg') }}" class="w-6 flex shrink-0" alt="icon">
-                </a>
-            </div>
-        </div>
-    </section>
-    <section id="FAQ" class="py-[100px] bg-[linear-gradient(270deg,rgba(255,255,255,0.5)_50%,rgba(243,239,245,0)_100%)]">
-        <div class="content flex flex-col w-full max-w-[1280px] mx-auto px-16 gap-8">
-            <div class="flex flex-col gap-5 text-center px-16">
-                <h2 class="font-bold text-xl leading-[25px] text-patungan-red">Frequently Asked Questions</h2>
-                <p class="font-Grifter font-bold text-4xl leading-[37px]">Tanya-Jawab Seputar Layanan Kami</p>
-            </div>
-            <div class="flex gap-6">
-                <div id="Left-Cards" class="flex flex-col gap-6">
-                    <div class="faq-card flex flex-col rounded-3xl p-8 gap-4 bg-white">
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">1</p>
-                        <div class="accordion group flex flex-col has-[:checked]:!h-11 overflow-hidden transition-all duration-300">
-                            <label class="flex items-center gap-4 justify-between min-h-[38px]">
-                                <input type="checkbox" class="hidden" checked>
-                                <h3 class="font-Grifter text-lg leading-[25px]">Langganan di Patungan Mulai Aktif Kapan, Ya?</h3>
-                                <img src="{{asset('assets/images/icons/arrow-head-down-black.svg') }}" class="w-6 flex shrink-0 group-has-[:checked]:-rotate-180 transition-all duration-300" alt="icon">
-                            </label>
-                            <div class="accordion-content mt-4">
-                                <p class="font-semibold leading-[25px]">Langganan di Patungan akan aktif segera setelah pembayaran Anda berhasil diverifikasi. Anda akan menerima notifikasi konfirmasi, dan semua fitur langganan langsung bisa digunakan.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faq-card flex flex-col rounded-3xl p-8 gap-4 bg-white">
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">3</p>
-                        <div class="accordion group flex flex-col has-[:checked]:!h-11 overflow-hidden transition-all duration-300">
-                            <label class="flex items-center gap-4 justify-between min-h-[38px]">
-                                <input type="checkbox" class="hidden" checked>
-                                <h3 class="font-Grifter text-lg leading-[25px]">Metode Pembayaran Apa Saja yang Tersedia di Split Thebill?</h3>
-                                <img src="{{asset('assets/images/icons/arrow-head-down-black.svg') }}" class="w-6 flex shrink-0 group-has-[:checked]:-rotate-180 transition-all duration-300" alt="icon">
-                            </label>
-                            <div class="accordion-content mt-4">
-                                <p class="font-semibold leading-[25px]">Di Split Thebill, kami menyediakan berbagai metode pembayaran yang mudah dan praktis. Anda bisa menggunakan transfer bank dengan dukungan untuk berbagai bank lokal, e-wallet seperti OVO, GoPay, dan Dana</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faq-card flex flex-col rounded-3xl p-8 gap-4 bg-white">
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">5</p>
-                        <div class="accordion group flex flex-col has-[:checked]:!h-11 overflow-hidden transition-all duration-300">
-                            <label class="flex items-center gap-4 justify-between min-h-[38px]">
-                                <input type="checkbox" class="hidden" checked>
-                                <h3 class="font-Grifter text-lg leading-[25px]">Bagaimana Jika Mengalami Kesulitan Saat Proses Pembayaran?</h3>
-                                <img src="{{asset('assets/images/icons/arrow-head-down-black.svg') }}" class="w-6 flex shrink-0 group-has-[:checked]:-rotate-180 transition-all duration-300" alt="icon">
-                            </label>
-                            <div class="accordion-content mt-4">
-                                <p class="font-semibold leading-[25px]">Jika Anda mengalami kendala saat melakukan pembayaran, jangan khawatir! Anda dapat segera menghubungi tim dukungan kami</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="Right-Cards" class="flex flex-col gap-6">
-                    <div class="faq-card flex flex-col rounded-3xl p-8 gap-4 bg-white">
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">2</p>
-                        <div class="accordion group flex flex-col has-[:checked]:!h-11 overflow-hidden transition-all duration-300">
-                            <label class="flex items-center gap-4 justify-between min-h-[38px]">
-                                <input type="checkbox" class="hidden" checked>
-                                <h3 class="font-Grifter text-lg leading-[25px]">Bagaimana Cara Memperpanjang Langganan di Patungan?</h3>
-                                <img src="{{asset('assets/images/icons/arrow-head-down-black.svg') }}" class="w-6 flex shrink-0 group-has-[:checked]:-rotate-180 transition-all duration-300" alt="icon">
-                            </label>
-                            <div class="accordion-content mt-4">
-                                <p class="font-semibold leading-[25px]">Memperpanjang langganan di Patungan sangat mudah!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faq-card flex flex-col rounded-3xl p-8 gap-4 bg-white">
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">4</p>
-                        <div class="accordion group flex flex-col has-[:checked]:!h-11 overflow-hidden transition-all duration-300">
-                            <label class="flex items-center gap-4 justify-between min-h-[38px]">
-                                <input type="checkbox" class="hidden" checked>
-                                <h3 class="font-Grifter text-lg leading-[25px]">Apa yang Harus Dilakukan Jika Ada Masalah dengan Akun Langganan?</h3>
-                                <img src="{{asset('assets/images/icons/arrow-head-down-black.svg') }}" class="w-6 flex shrink-0 group-has-[:checked]:-rotate-180 transition-all duration-300" alt="icon">
-                            </label>
-                            <div class="accordion-content mt-4">
-                                <p class="font-semibold leading-[25px]">Jika Anda mengalami masalah dengan akun langganan, langkah pertama yang bisa Anda lakukan adalah memeriksa kembali detail akun Anda, seperti status pembayaran atau informasi login</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faq-card flex flex-col rounded-3xl p-8 gap-4 bg-white">
-                        <p class="font-Grifter font-bold text-2xl leading-[25px]">6</p>
-                        <div class="accordion group flex flex-col has-[:checked]:!h-11 overflow-hidden transition-all duration-300">
-                            <label class="flex items-center gap-4 justify-between min-h-[38px]">
-                                <input type="checkbox" class="hidden" checked>
-                                <h3 class="font-Grifter text-lg leading-[25px]">Bagaimana Cara Memperpanjang Langganan di Patungan?</h3>
-                                <img src="{{asset('assets/images/icons/arrow-head-down-black.svg') }}" class="w-6 flex shrink-0 group-has-[:checked]:-rotate-180 transition-all duration-300" alt="icon">
-                            </label>
-                            <div class="accordion-content mt-4">
-                                <p class="font-semibold leading-[25px]">Your subscription becomes active immediately after the payment is successfully processed. You will receive a confirmation email with the details</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer class="py-[52px] bg-[linear-gradient(277.6deg,#FFFFFF_0.22%,#F5F3F6_21.18%)]">
-        <div class="flex flex-col w-full max-w-[1280px] px-[52px] mx-auto gap-[52px]">
-            <div class="flex gap-[72px]">
-                <div class="flex flex-col gap-6 w-full max-w-[349px] items-start">
-                    <img src="{{asset('assets/images/logos/logoo.svg') }}" class="h-10 flex shrink-0" alt="logo">
-                    <p class="font-medium leading-[25px] text-patungan-grey">Platform yang memberikan layanan berlangganan dengan cara berbagi langganan untuk menikmati fitur premium dengan harga murah, bebas kendala, account dijamin original, dan juga legal</p>
-                </div>
-                <div class="flex gap-[52px]">
-                    <ul class="flex flex-col gap-4 min-w-[165px]">
-                        <p class="font-semibold leading-5">Popular Services</p>
-                        <li class="font-medium leading-5 text-patungan-grey">
-                            <a href="#" class="hover:text-patungan-black transition-all duration-300">Home</a>
-                        </li>
-                        <li class="font-medium leading-5 text-patungan-grey">
-                            <a href="#" class="hover:text-patungan-black transition-all duration-300">Layanan</a>
-                        </li>
-                        <li class="font-medium leading-5 text-patungan-grey">
-                            <a href="#" class="hover:text-patungan-black transition-all duration-300">Cara Pesan</a>
-                        </li>
-                        <li class="font-medium leading-5 text-patungan-grey">
-                            <a href="#" class="hover:text-patungan-black transition-all duration-300">Testimoni</a>
-                        </li>
-                        <li class="font-medium leading-5 text-patungan-grey">
-                            <a href="#" class="hover:text-patungan-black transition-all duration-300">FAQ</a>
-                        </li>
+
+                <div>
+                    <h2 class="font-bold">Jelajahi</h2>
+                    <ul class="mt-4 grid gap-3 text-patungan-grey">
+                        <li><a href="#Products" class="transition hover:text-patungan-black">Layanan</a></li>
+                        <li><a href="#How-It-Works" class="transition hover:text-patungan-black">Cara Pesan</a></li>
+                        <li><a href="#Happy-Customer" class="transition hover:text-patungan-black">Testimoni</a></li>
+                        <li><a href="#FAQ" class="transition hover:text-patungan-black">FAQ</a></li>
                     </ul>
-                    <ul class="flex flex-col gap-4 min-w-[165px]">
-                        <p class="font-semibold leading-5">Company</p>
-                        <li class="font-medium leading-5 text-patungan-grey">
-                            <a href="#" class="hover:text-patungan-black transition-all duration-300">About Us</a>
-                        </li>
-                        <li class="font-medium leading-5 text-patungan-grey">
-                            <a href="#" class="hover:text-patungan-black transition-all duration-300">Our Contact</a>
-                        </li>
-                        <li class="font-medium leading-5 text-patungan-grey">
-                            <a href="#" class="hover:text-patungan-black transition-all duration-300">Term Policy</a>
-                        </li>
+                </div>
+
+                <div>
+                    <h2 class="font-bold">Pesanan</h2>
+                    <ul class="mt-4 grid gap-3 text-patungan-grey">
+                        <li><a href="{{ route('front.check_booking') }}" class="transition hover:text-patungan-black">Cek Pesanan</a></li>
+                        <li><a href="{{ url('/admin') }}" class="transition hover:text-patungan-black">Panel Admin</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="flex items-center">
-                <p class="w-full font-medium leading-5 text-patungan-grey">©2024 Split TheBIll. All Rights Reserved</p>
-                <div class="flex items-center gap-4 mx-auto shrink-0">
-                    <a href="https://www.instagram.com/split.thebill">
-                        <img src="{{asset('assets/images/icons/instagram.svg') }}" class="w-6 flex shrink-0" alt="icon">
-                    </a>
-                    <a href="#">
-                        <img src="{{asset('assets/images/icons/whatsapp.svg') }}" class="w-6 flex shrink-0" alt="icon">
-                    </a>
-                    <a href="#">
-                        <img src="{{asset('assets/images/icons/facebook.svg') }}" class="w-6 flex shrink-0" alt="icon">
-                    </a>
-                </div>
-                <div class="w-full flex justify-end">
-                    <a href="" class="font-medium leading-5 text-patungan-grey text-nowrap">Terms & Conditions</a>
-                </div>
+
+            <div class="mt-10 flex flex-col gap-5 border-t border-patungan-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <p class="text-sm font-medium text-patungan-grey">© {{ now()->year }} Split TheBill. Hak cipta dilindungi.</p>
+                <a href="https://www.instagram.com/split.thebill" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-patungan-grey transition hover:text-patungan-black">
+                    <img src="{{ asset('assets/images/icons/instagram.svg') }}" class="h-5 w-5" alt="">
+                    Instagram
+                </a>
             </div>
         </div>
     </footer>
-    @endsection
-
-    @push('after-scripts')
-    <script src="{{asset('js/accordion.js')}}"></script> 
-    <script>
-        const texts = document.querySelectorAll('#slider span');
-        const sliderContainer = document.getElementById('slider-container');
-        const slider = document.getElementById('slider');
-        let currentIndex = 0;
-      
-        function updateSlider() {
-          const currentText = texts[currentIndex];
-          const containerWidth = currentText.offsetWidth;
-      
-          // Smoothly update the container's width
-          sliderContainer.style.transition = 'width 300ms';
-          sliderContainer.style.width = containerWidth + 'px';
-      
-          // Calculate the correct offset based on each text width
-          let offset = 0;
-          for (let i = 0; i < currentIndex; i++) {
-            offset += texts[i].offsetWidth;
-          }
-      
-          // Slide the text horizontally to the correct position
-          slider.style.transform = `translateX(-${offset}px)`;
-      
-          // Move to the next text after 1s
-          currentIndex = (currentIndex + 1) % texts.length;
-        }
-      
-        // Set initial width and position on page load
-        function setInitialWidth() {
-          const firstText = texts[0];
-          sliderContainer.style.width = firstText.offsetWidth + 'px';
-        }
-      
-        // Ensure the width is correct when the page loads
-        window.addEventListener('load', () => {
-          setInitialWidth();
-          // Start the slider interval after setting initial width
-          setInterval(updateSlider, 2000);
-        });
-        
-    </script>
-    @endpush
+@endsection

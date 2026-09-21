@@ -3,9 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductSubscriptionResource\Pages;
-use App\Filament\Resources\ProductSubscriptionResource\RelationManagers;
 use App\Models\Product;
 use App\Models\ProductSubscription;
+use App\Services\BookingService;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\ToggleButtons;
@@ -17,7 +17,6 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
 
 class ProductSubscriptionResource extends Resource
 {
@@ -41,132 +40,117 @@ class ProductSubscriptionResource extends Resource
                 Forms\Components\Wizard::make([
 
                     Forms\Components\Wizard\Step::make('Product and Price')
-                    ->schema([
-
-                        Grid::make(2)
                         ->schema([
-                            Forms\Components\Select::make('product_id')
-                                ->relationship('product', 'name')
-                                ->searchable()
-                                ->preload()
-                                ->required()
-                                ->live()
-                                ->afterStateUpdated(function ($state, callable $set){
-                                    $product = Product::find($state);
-                                    $price = $product ? $product->price_per_person : 0;
-                                    $duration = $product ? $product->duration : '0 Jam';
 
-                                    $set('price', $price);
-                                    $set('duration', $duration);
+                            Grid::make(2)
+                                ->schema([
+                                    Forms\Components\Select::make('product_id')
+                                        ->relationship('product', 'name')
+                                        ->searchable()
+                                        ->preload()
+                                        ->required()
+                                        ->live()
+                                        ->afterStateUpdated(function ($state, callable $set) {
+                                            $product = Product::find($state);
+                                            $price = $product ? $product->price_per_person : 0;
+                                            $duration = $product ? $product->duration : '0 Jam';
 
-                                    $tax = 0.10;
-                                    $totalTaxAmount = $tax * $price;
+                                            $set('price', $price);
+                                            $set('duration', $duration);
 
-                                    $totalAmount = $price + $totalTaxAmount;
-                                    $set('total_amount', number_format($totalAmount, 0, '', ''));
-                                    $set('total_tax_amount', number_format($totalTaxAmount, 0, '', ''));
-                                })
-                                ->afterStateHydrated(function (callable $get, callable $set, $state){
-                                    $productId = $state;
-                                    if ($productId){
-                                        $product = Product::find($productId);
-                                        $price = $product ? $product->price_per_person : 0;
-                                        $set('price', $price);
+                                            $amounts = BookingService::calculateAmounts((int) $price);
+                                            $set('total_amount', $amounts['total']);
+                                            $set('total_tax_amount', $amounts['admin_fee']);
+                                        }),
 
-                                        $tax = 0.10;
-                                        $totalTaxAmount = $tax * $price;
-                                        $set('total_tax_amount', number_format($totalTaxAmount, 0, '', ''));
-                                        
-                                    }
-                                }),
+                                    Forms\Components\TextInput::make('price')
+                                        ->required()
+                                        ->label('Price per person')
+                                        ->readOnly()
+                                        ->numeric()
+                                        ->prefix('IDR'),
 
-                                Forms\Components\TextInput::make('price')
-                                ->required()
-                                ->label('Price per person')
-                                ->readOnly()
-                                ->numeric()
-                                ->prefix('IDR'),
+                                    Forms\Components\TextInput::make('total_amount')
+                                        ->required()
+                                        ->readOnly()
+                                        ->numeric()
+                                        ->prefix('IDR'),
 
-                                Forms\Components\TextInput::make('total_amount')
-                                ->required()
-                                ->readOnly()
-                                ->numeric()
-                                ->prefix('IDR'),
+                                    Forms\Components\TextInput::make('total_tax_amount')
+                                        ->required()
+                                        ->readOnly()
+                                        ->numeric()
+                                        ->prefix('IDR'),
 
-                                Forms\Components\TextInput::make('total_tax_amount')
-                                ->required()
-                                ->readOnly()
-                                ->numeric()
-                                ->prefix('IDR'),
+                                    Forms\Components\TextInput::make('duration')
+                                        ->required()
+                                        ->readOnly()
+                                        ->prefix('Month'),
 
-                                Forms\Components\TextInput::make('duration')
-                                ->required()
-                                ->readOnly()
-                                ->prefix('Month'),
-
-                            
-                            ]),
+                                ]),
                         ]),
 
                     Forms\Components\Wizard\Step::make('Customer Information')
-                    ->schema([
-
-                        Grid::make(2)
                         ->schema([
-                            Forms\Components\TextInput::make('name')
-                                ->required()
-                                ->maxLength(255),
 
-                            Forms\Components\TextInput::make('phone')
-                                ->required()
-                                ->maxLength(255),
+                            Grid::make(2)
+                                ->schema([
+                                    Forms\Components\TextInput::make('name')
+                                        ->required()
+                                        ->maxLength(255),
 
-                            Forms\Components\TextInput::make('email')
-                                ->required()
-                                ->maxLength(255),
+                                    Forms\Components\TextInput::make('phone')
+                                        ->required()
+                                        ->maxLength(255),
 
-                            
+                                    Forms\Components\TextInput::make('email')
+                                        ->required()
+                                        ->maxLength(255),
+
+                                ]),
                         ]),
-                    ]),
 
                     Forms\Components\Wizard\Step::make('Payment Information')
-                    ->schema([
-                        Forms\Components\TextInput::make('booking_trx_id')
-                            ->required()
-                            ->maxLength(255),
+                        ->schema([
+                            Forms\Components\TextInput::make('booking_trx_id')
+                                ->required()
+                                ->maxLength(255),
 
-                        Forms\Components\TextInput::make('customer_bank_name')
-                            ->required()
-                            ->maxLength(255),
+                            Forms\Components\TextInput::make('customer_bank_name')
+                                ->required()
+                                ->maxLength(255),
 
-                        Forms\Components\TextInput::make('customer_bank_account')
-                            ->required()
-                            ->maxLength(255),
-                        
-                        Forms\Components\TextInput::make('customer_bank_number')
-                            ->required()
-                            ->maxLength(255),
+                            Forms\Components\TextInput::make('customer_bank_account')
+                                ->required()
+                                ->maxLength(255),
 
-                        ToggleButtons::make('is_paid')
-                            ->label('Apakah sudah membayar?')
-                            ->boolean()
-                            ->grouped()
-                            ->icons([
-                                true => 'heroicon-o-pencil',
-                                false => 'heroicon-o-clock',
-                            ])
-                            ->required(),
+                            Forms\Components\TextInput::make('customer_bank_number')
+                                ->required()
+                                ->maxLength(255),
+
+                            ToggleButtons::make('is_paid')
+                                ->label('Apakah sudah membayar?')
+                                ->boolean()
+                                ->grouped()
+                                ->icons([
+                                    true => 'heroicon-o-pencil',
+                                    false => 'heroicon-o-clock',
+                                ])
+                                ->required(),
 
                             Forms\Components\FileUpload::make('proof')
-                            ->image()
-                            ->required(),
+                                ->disk(config('filesystems.payment_proof_disk'))
+                                ->directory('proofs')
+                                ->visibility('private')
+                                ->maxSize(4096)
+                                ->image()
+                                ->required(),
 
-                            ]),
-                     ])
-
-                        ->columnSpan('full')
-                        ->columns(1)
-                        ->skippable()
+                        ]),
+                ])
+                    ->columnSpan('full')
+                    ->columns(1)
+                    ->skippable(),
             ]);
     }
 
@@ -176,14 +160,15 @@ class ProductSubscriptionResource extends Resource
             ->columns([
                 //
 
-                Tables\Columns\ImageColumn::make('product.thumbnail'),
+                Tables\Columns\ImageColumn::make('product.thumbnail')
+                    ->disk(config('filesystems.product_media_disk')),
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('booking_trx_id')
                     ->searchable(),
-                
+
                 Tables\Columns\IconColumn::make('is_paid')
                     ->boolean()
                     ->trueColor('success')
@@ -196,7 +181,6 @@ class ProductSubscriptionResource extends Resource
                 SelectFilter::make('product_id')
                     ->label('Product')
                     ->relationship('product', 'name'),
-                    Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
@@ -209,15 +193,15 @@ class ProductSubscriptionResource extends Resource
                         $record->save();
 
                         Notification::make()
-                        ->title('Order Approved')
-                        ->success()
-                        ->body('Order has been approved successfully')
-                        ->send();
+                            ->title('Order Approved')
+                            ->success()
+                            ->body('Order has been approved successfully')
+                            ->send();
                     })
 
                     ->color('success')
                     ->requiresConfirmation()
-                    ->visible(fn (ProductSubscription $record) => !$record->is_paid),
+                    ->visible(fn (ProductSubscription $record) => ! $record->is_paid),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

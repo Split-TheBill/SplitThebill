@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Str;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -26,6 +27,7 @@ class Product extends Model
         'capacity',
         'is_popular',
     ];
+
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -36,6 +38,20 @@ class Product extends Model
         );
     }
 
+    protected function thumbnailUrl(): Attribute
+    {
+        return Attribute::get(
+            fn (): string => Storage::disk(config('filesystems.product_media_disk'))->url($this->thumbnail),
+        );
+    }
+
+    protected function photoUrl(): Attribute
+    {
+        return Attribute::get(
+            fn (): string => Storage::disk(config('filesystems.product_media_disk'))->url($this->photo),
+        );
+    }
+
     public function groups(): HasMany
     {
         return $this->hasMany(SubscriptionGroup::class);
@@ -43,6 +59,6 @@ class Product extends Model
 
     public function keypoints(): HasMany
     {
-        return $this->hasMany(ProductKeyPoint::class);
+        return $this->hasMany(ProductKeypoint::class);
     }
 }

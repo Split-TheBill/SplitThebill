@@ -1,61 +1,89 @@
 @extends('layouts.master')
-@section('content')
 
-    <div class="flex flex-col min-h-screen w-full justify-center items-center bg-[linear-gradient(113.19deg,#E25520_0%,#A83279_100.41%)]">
-        <div class="absolute w-full h-full overflow-hidden">
-            <img src="{{asset('assets/images/backgrounds/Full-bg-1.svg')}}" class="w-full h-full object-cover" alt="background">
-        </div>
-        <main class="relative flex flex-col h-screen py-10 px-16 gap-8 items-center justify-between">
-            <a href="index.html">
-                <img src="{{asset('assets/images/logos/logos.svg')}}" class="h-10 flex shrink-0" alt="logo">
+@section('title', 'Cek Pesanan — Split TheBill')
+
+@section('content')
+    <div class="relative min-h-screen min-h-dvh overflow-hidden bg-[linear-gradient(113.19deg,#092267_0%,#06061C_100%)]">
+        <img src="{{ asset('assets/images/backgrounds/Full-bg-1.svg') }}" class="motion-glow absolute inset-0 h-full w-full object-cover" alt="" aria-hidden="true">
+
+        <main id="main-content" class="site-shell relative flex min-h-screen min-h-dvh flex-col items-center justify-between gap-8 py-6 sm:py-10">
+            <a href="{{ route('front.index') }}" class="reveal-on-scroll shrink-0" aria-label="Split TheBill — Beranda">
+                <img src="{{ asset('assets/images/logos/logos.svg') }}" class="h-9 w-auto sm:h-10" alt="Split TheBill">
             </a>
-            <form action="{{route('front.check_booking_details')}}" method="POST" class="flex flex-col w-full max-w-[782px] items-center rounded-[64px] p-[52px] gap-8 bg-white">
+
+            <form action="{{ route('front.check_booking_details') }}" method="POST" class="motion-card reveal-on-scroll reveal-delay-1 w-full max-w-2xl rounded-[32px] bg-white p-5 shadow-2xl sm:rounded-[48px] sm:p-9 lg:p-12">
                 @csrf
-                <div class="flex flex-col items-center text-center gap-6">
-                    <img src="{{asset('assets/images/icons/receipt-text-orange-fill-1.svg')}}" class="w-[62px] flex shrink-0" alt="icon">
-                    <h1 class="font-Grifter font-bold text-[32px] leading-[51px]">Lihat Pesanan Kamu</h1>
-                    @if ($errors->any())
-                    <div class="text-white font-bold py-3 px-10 rounded-full bg-patungan-orange">
-                        <ul>
-                            @foreach ( $errors->all() as $error )
-                                <li>{{$error}}</li>
+
+                <div class="text-center">
+                    <img src="{{ asset('assets/images/icons/receipt-text-orange-fill-1.svg') }}" class="motion-float mx-auto h-14 w-14 sm:h-[62px] sm:w-[62px]" alt="" aria-hidden="true">
+                    <h1 class="section-title mt-5">Lihat Pesanan Kamu</h1>
+                    <p class="mx-auto mt-3 max-w-xl font-medium leading-7 text-patungan-grey">Masukkan kode booking dan nomor WhatsApp yang digunakan saat memesan.</p>
+                </div>
+
+                @if ($errors->any())
+                    <div class="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-left text-red-800" role="alert" aria-labelledby="check-booking-errors-title">
+                        <p id="check-booking-errors-title" class="font-bold">Pesanan belum dapat ditemukan:</p>
+                        <ul class="mt-2 list-disc space-y-1 pl-5 text-sm font-medium">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
-                    @endif
-                </div>
-                <div class="flex flex-col gap-6">
-                    <div class="grid grid-cols-2 gap-6">
-                        <label class="flex flex-col gap-4">
-                            <p class="font-bold text-xl leading-[25px] text-patungan-grey">Booking Code</p>
-                            <div class="flex items-center rounded-3xl border border-patungan-border p-6 gap-4 bg-patungan-bg-grey focus-within:border-patungan-orange transition-all duration-300">
-                                <img src="{{asset('assets/images/icons/receipt-black.svg')}}" class="w-6 h-6 flex shrink-0" alt="icon">
-                                <div class="flex h-6 border border-patungan-border"></div>
-                                <input type="text" name="booking_trx_id" id="" class="appearance-none outline-none bg-patungan-bg-grey w-full font-bold text-xl leading-[25px] placeholder:text-patungan-black" placeholder="Enter the code">
-                            </div>
-                        </label>
-                        <label class="flex flex-col gap-4">
-                            <p class="font-bold text-xl leading-[25px] text-patungan-grey">WhatsApp Number</p>
-                            <div class="flex items-center rounded-3xl border border-patungan-border p-6 gap-4 bg-patungan-bg-grey focus-within:border-patungan-orange transition-all duration-300">
-                                <img src="{{asset('assets/images/icons/whatsapp-black.svg')}}" class="w-6 h-6 flex shrink-0" alt="icon">
-                                <div class="flex h-6 border border-patungan-border"></div>
-                                <input type="tel" name="phone" id="phone-number" class="appearance-none outline-none bg-patungan-bg-grey w-full font-bold text-xl leading-[25px] placeholder:text-patungan-black" placeholder="+62 Enter the number">
-                            </div>
-                        </label>
+                @endif
+
+                <div class="mt-7 grid gap-5 md:grid-cols-2">
+                    <div>
+                        <label for="booking-trx-id" class="mb-2 block font-bold text-patungan-grey">Kode booking</label>
+                        <input
+                            type="text"
+                            name="booking_trx_id"
+                            id="booking-trx-id"
+                            value="{{ old('booking_trx_id') }}"
+                            class="form-control @error('booking_trx_id') border-red-500 @enderror"
+                            autocomplete="off"
+                            placeholder="Contoh: STB12345"
+                            required
+                            @error('booking_trx_id')
+                                aria-describedby="booking-trx-id-error"
+                                aria-invalid="true"
+                            @enderror
+                        >
+                        @error('booking_trx_id')
+                            <p id="booking-trx-id-error" class="mt-2 text-sm font-semibold text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
-                    <p class="font-['Poppins'] font-medium leading-[25px] text-patungan-grey text-center">Masukkan kode booking yang telah dikirim ke email Anda untuk memeriksa status pemesanan Anda.</p>
+
+                    <div>
+                        <label for="phone-number" class="mb-2 block font-bold text-patungan-grey">Nomor WhatsApp</label>
+                        <input
+                            type="tel"
+                            name="phone"
+                            id="phone-number"
+                            value="{{ old('phone') }}"
+                            class="form-control @error('phone') border-red-500 @enderror"
+                            autocomplete="tel"
+                            inputmode="tel"
+                            placeholder="+62 812 3456 7890"
+                            required
+                            @error('phone')
+                                aria-describedby="phone-error"
+                                aria-invalid="true"
+                            @enderror
+                        >
+                        @error('phone')
+                            <p id="phone-error" class="mt-2 text-sm font-semibold text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
-                <button type="submit" class="flex items-center rounded-full h-[60px] px-9 w-full gap-[6px] bg-patungan-orange justify-center">
-                    <span class="font-bold text-lg leading-5 text-white">Lihat Pesananku</span>
-                </button>
+
+                <button type="submit" class="btn-primary motion-glow mt-7 w-full">Lihat Pesananku</button>
             </form>
-            <a href="{{route('front.index')}}" class="font-bold text-xl leading-[25px] text-white">Back to Homepage > </a>
+
+            <a href="{{ route('front.index') }}" class="font-bold text-white underline-offset-4 hover:underline">Kembali ke Beranda</a>
         </main>
     </div>
-
-
 @endsection
 
 @push('after-scripts')
-    <script src="{{asset('js/whatsapp-number.js')}}"></script>
+    <script src="{{ asset('js/whatsapp-number.js') }}"></script>
 @endpush

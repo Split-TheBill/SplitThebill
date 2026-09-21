@@ -30,4 +30,3 @@ class UpdateDurationColumnInProduct extends Migration
         });
     }
 }
-

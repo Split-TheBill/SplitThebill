@@ -3,13 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubscriptionGroupResource\Pages;
-use App\Filament\Resources\SubscriptionGroupResource\RelationManagers;
 use App\Filament\Resources\SubscriptionGroupResource\RelationManagers\GroupMessagesRelationManager;
 use App\Filament\Resources\SubscriptionGroupResource\RelationManagers\GroupParticipantsRelationManager;
 use App\Models\Product;
 use App\Models\SubscriptionGroup;
 use Filament\Forms;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -35,37 +33,32 @@ class SubscriptionGroupResource extends Resource
                     ->preload()
                     ->required()
                     ->live()
-                    ->afterStateUpdated(function ($state, callable $set){
+                    ->afterStateUpdated(function ($state, callable $set) {
                         $product = Product::find($state);
-                        $max_capacity = $product ? $product->capacity : 0;
+                        $maxCapacity = $product ? $product->capacity : 0;
 
-                        $set('max_capacity', $max_capacity);
-                    })
-
-                    ->afterStateHydrated(function (callable $get, callable $set, $state){
-                        $productId = $state;
-                        if ($productId) {
-                            $product = Product::find($productId);
-                            $max_capacity = $product ? $product->capacity : 0;
-
-                            $set('max_capacity', $max_capacity);
-                        }
+                        $set('max_capacity', $maxCapacity);
                     }),
 
-                    Forms\Components\TextInput::make('max_capacity')
-                        ->required()
-                        ->label('Max Capacity')
-                        ->readOnly()
-                        ->numeric()
-                        ->prefix('People'),
-
-                    Forms\Components\TextInput::make('participant_count')
+                Forms\Components\TextInput::make('max_capacity')
                     ->required()
-                    ->label('Total Capacity')
+                    ->label('Max Capacity')
+                    ->disabled()
+                    ->dehydrated()
                     ->numeric()
                     ->prefix('People'),
 
-                    Forms\Components\Select::make('product_subscription_id')
+                Forms\Components\TextInput::make('participant_count')
+                    ->required()
+                    ->default(0)
+                    ->disabled()
+                    ->dehydrated()
+                    ->label('Total Capacity')
+                    ->numeric()
+                    ->minValue(0)
+                    ->prefix('People'),
+
+                Forms\Components\Select::make('product_subscription_id')
                     ->relationship('productSubscription', 'booking_trx_id')
                     ->searchable()
                     ->preload()
@@ -80,6 +73,7 @@ class SubscriptionGroupResource extends Resource
                 //
 
                 Tables\Columns\ImageColumn::make('product.thumbnail')
+                    ->disk(config('filesystems.product_media_disk'))
                     ->label('Photo'),
 
                 Tables\Columns\TextColumn::make('productSubscription.booking_trx_id')
@@ -87,21 +81,21 @@ class SubscriptionGroupResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('id')
-                ->label('Group Id')
-                ->searchable(),
+                    ->label('Group Id')
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('participant_count'),
 
                 Tables\Columns\TextColumn::make('max_capacity'),
 
                 Tables\Columns\IconColumn::make('is_full')
-                ->label('Full')
-                ->boolean()
-                ->getStateUsing(fn ($record)=> $record->participant_count >= $record->max_capacity)
-                ->trueIcon('heroicon-o-check-circle')
-                ->falseIcon('heroicon-o-x-circle')
-                ->trueColor('success')
-                ->falseColor('danger'),                
+                    ->label('Full')
+                    ->boolean()
+                    ->getStateUsing(fn ($record) => $record->participant_count >= $record->max_capacity)
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

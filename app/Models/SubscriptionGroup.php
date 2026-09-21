@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubscriptionGroup extends Model
 {
@@ -26,17 +26,16 @@ class SubscriptionGroup extends Model
 
     public function productSubscription(): BelongsTo
     {
-        return $this->belongsTo( ProductSubscription::class, 'product_subscription_id');
+        return $this->belongsTo(ProductSubscription::class, 'product_subscription_id');
     }
 
     public function groupMessages(): HasMany
     {
-        return $this->hasMany( GroupMessage::class)->latest();
+        return $this->hasMany(GroupMessage::class)->latest();
     }
 
-    public function groupParticipants(): HasMany 
+    public function groupParticipants(): HasMany
     {
         return $this->hasMany(GroupParticipant::class);
     }
-
 }

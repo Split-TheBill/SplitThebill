@@ -1,0 +1,9 @@
+/vendor
+/node_modules
+/.env
+/.env.*
+/database/*.sqlite*
+/storage/app/private/**
+/storage/app/public/**
+/tests
+/.git

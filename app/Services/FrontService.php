@@ -12,6 +12,6 @@ class FrontService
         $newProducts = Product::latest()->get();
 
         return compact('popularProducts', 'newProducts');
-        
+
     }
 }

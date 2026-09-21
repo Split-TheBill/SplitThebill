@@ -1,23 +1,23 @@
 const input = document.getElementById('phone-number');
 
-input.addEventListener('input', function() {
-    let value = input.value;
+if (input) {
+    const normalizePhoneNumber = () => {
+        let value = input.value.trim();
 
-    // Ensure the value starts with +62
-    if (!value.startsWith('+62')) {
-        input.value = '+62';
-    }
-
-    // Remove any non-numeric characters after +62
-    if (value.length > 3) {
-        let numbersAfterPrefix = value.slice(3).replace(/\D/g, ''); // Keep only digits after +62
-
-        // Prevent the first digit after +62 from being '0'
-        if (numbersAfterPrefix.startsWith('0')) {
-            numbersAfterPrefix = numbersAfterPrefix.slice(1); // Remove the leading '0'
+        if (value === '') {
+            return;
         }
 
-        // Set the input value to +62 followed by valid numbers
-        input.value = '+62' + numbersAfterPrefix;
-    }
-});
+        if (value.startsWith('0')) {
+            value = `+62${value.slice(1)}`;
+        } else if (!value.startsWith('+62')) {
+            value = `+62${value.replace(/^\+/, '')}`;
+        }
+
+        const numbersAfterPrefix = value.slice(3).replace(/\D/g, '').replace(/^0+/, '');
+        input.value = `+62${numbersAfterPrefix}`;
+    };
+
+    input.addEventListener('input', normalizePhoneNumber);
+    input.addEventListener('blur', normalizePhoneNumber);
+}

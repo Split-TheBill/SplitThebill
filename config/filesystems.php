@@ -15,6 +15,10 @@ return [
 
     'default' => env('FILESYSTEM_DISK', 'local'),
 
+    'product_media_disk' => env('PRODUCT_MEDIA_DISK', 'public'),
+
+    'payment_proof_disk' => env('PAYMENT_PROOF_DISK', 'local'),
+
     /*
     |--------------------------------------------------------------------------
     | Filesystem Disks
@@ -43,6 +47,24 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
+        ],
+
+        'database-public' => [
+            'driver' => 'database',
+            'connection' => env('DB_MEDIA_CONNECTION'),
+            'bucket' => 'public',
+            'visibility' => 'public',
+            'public_route' => 'media.public',
+            'throw' => true,
+        ],
+
+        'database-private' => [
+            'driver' => 'database',
+            'connection' => env('DB_MEDIA_CONNECTION'),
+            'bucket' => 'private',
+            'visibility' => 'private',
+            'temporary_route' => 'media.private',
+            'throw' => true,
         ],
 
         's3' => [

@@ -1,144 +1,148 @@
 @extends('layouts.master')
-@section ('content')
-    <x-navbar/>
-    <main class="flex flex-col w-full max-w-[1280px] mx-auto px-16 gap-9 mt-16">
-        <div class="flex flex-col gap-6">
-            <div class="flex items-center gap-2">
-                <p class="font-semibold text-lg leading-[22px] text-patungan-grey last:text-patungan-black">Home</p>
-                <p class="font-semibold leading-5 text-patungan-grey">></p>
-                <p class="font-semibold text-lg leading-[22px] text-patungan-grey last:text-patungan-black">{{$product->name}}</p>
-            </div>
-            <h1 class="font-Grifter font-bold text-[32px] leading-[33px]">Product Details</h1>
-        </div>
-        <div class="flex gap-9 mb-20">
-            <div id="Details-Content" class="flex flex-col w-full max-w-[670px] shrink-0 gap-9">
-                <div class="flex flex-col rounded-[32px] bg-white overflow-hidden">
-                    <div class="flex w-full h-[200px] overflow-hidden">
-                        <img src="{{Storage::url($product->thumbnail)}}" class="w-full h-full object-cover" alt="thumbnails">
+
+@section('title', $product->name . ' — Split TheBill')
+
+@section('content')
+    <x-navbar />
+
+    <main id="main-content" class="site-shell py-8 sm:py-10 lg:py-14">
+        <header class="reveal-on-scroll mb-8 space-y-4 sm:mb-10">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex flex-wrap items-center gap-2 text-sm font-semibold text-patungan-grey sm:text-base">
+                    <li><a href="{{ route('front.index') }}" class="transition hover:text-patungan-black">Beranda</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li class="text-patungan-black" aria-current="page">{{ $product->name }}</li>
+                </ol>
+            </nav>
+            <h1 class="section-title">Detail Produk</h1>
+        </header>
+
+        <div class="grid min-w-0 gap-8 lg:grid-cols-3 lg:items-start xl:gap-10">
+            <div class="min-w-0 space-y-8 lg:col-span-2">
+                <article class="surface-card motion-card reveal-on-scroll overflow-hidden">
+                    <div class="h-44 bg-[#D9D9D9] sm:h-56 lg:h-64">
+                        <img
+                            src="{{ $product->thumbnail_url }}"
+                            class="h-full w-full object-cover"
+                            alt="Banner {{ $product->name }}"
+                            decoding="async"
+                        >
                     </div>
-                    <div class="flex flex-col p-8 gap-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-[62px] h-[62px] flex shrink-0 rounded-xl overflow-hidden">
-                                <img src="{{Storage::url($product->photo)}}" class="w-full h-full object-contain object-center" alt="icon">
+
+                    <div class="space-y-7 p-5 sm:p-8">
+                        <div class="flex min-w-0 items-center gap-3 sm:gap-4">
+                            <div class="h-14 w-14 shrink-0 overflow-hidden rounded-xl sm:h-[62px] sm:w-[62px]">
+                                <img
+                                    src="{{ $product->photo_url }}"
+                                    class="h-full w-full object-contain object-center"
+                                    alt="Logo {{ $product->name }}"
+                                    width="62"
+                                    height="62"
+                                    decoding="async"
+                                >
                             </div>
-                            <div>
-                                <h2 class="font-bold text-xl leading-[25px]">{{$product->name}}</h2>
-                                <div class="flex items-center gap-[2px] mt-[2px]">
-                                    <img src="{{asset('assets/images/icons/Star.svg')}}" class="w-6 flex shrink-0" alt="icon">
-                                    <p class="font-bold text-lg leading-[22px]">4.9</p>
-                                    <p class="font-semibold leading-[20px] text-patungan-grey">(2120 Reviews)</p>
+                            <div class="min-w-0">
+                                <h2 class="break-words text-xl font-bold leading-tight">{{ $product->name }}</h2>
+                                <div class="mt-1 flex flex-wrap items-center gap-1" aria-label="Rating 4,9 dari 5 berdasarkan 2.120 ulasan">
+                                    <img src="{{ asset('assets/images/icons/Star.svg') }}" class="h-5 w-5 shrink-0" alt="" aria-hidden="true">
+                                    <span class="font-bold">4,9</span>
+                                    <span class="font-semibold text-patungan-grey">(2.120 ulasan)</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-col rounded-3xl border border-patungan-border p-4 gap-4">
-                            <div class="flex items-center justify-between">
-                                <p class="font-extrabold text-2xl leading-[30px]">Rp {{number_format($product->price_per_person,0,',','.')}}<span class="font-semibold text-lg leading-[22px] text-patungan-grey">/person</span></p>
-                                <div class="flex items-center rounded-lg p-2 gap-1 bg-patungan-red/10">
-                                    <img src="{{asset('assets/images/icons/clock-red.svg')}}" class="w-6 flex shrink-0" alt="icon">
-                                    <p class="font-bold leading-5 text-patungan-red">{{$product->duration}}</p>
+
+                        <div class="rounded-2xl border border-patungan-border p-4 sm:rounded-3xl sm:p-5">
+                            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                <p class="text-2xl font-extrabold leading-tight">
+                                    Rp {{ number_format($product->price_per_person, 0, ',', '.') }}
+                                    <span class="text-base font-semibold text-patungan-grey">/orang</span>
+                                </p>
+                                <div class="flex w-fit items-center gap-1 rounded-lg bg-patungan-red/10 px-3 py-2">
+                                    <img src="{{ asset('assets/images/icons/clock-red.svg') }}" class="h-5 w-5 shrink-0" alt="" aria-hidden="true">
+                                    <span class="font-bold text-patungan-red">{{ $product->duration }}</span>
                                 </div>
                             </div>
-                            <hr class="border-patungan-border">
-                            <div class="flex items-center gap-2">
-                                <img src="{{asset('assets/images/icons/verify-green.svg')}}" class="w-[18px] flex shrink-0" alt="icon">
-                                <p class="font-medium text-lg leading-[22px] text-patungan-grey">Diskon 10%</p>
+                            <hr class="my-4 border-patungan-border">
+                            <div class="flex items-center gap-2 text-patungan-grey">
+                                <img src="{{ asset('assets/images/icons/verify-green.svg') }}" class="h-[18px] w-[18px] shrink-0" alt="" aria-hidden="true">
+                                <span class="font-medium">Lebih hemat dengan harga patungan</span>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-3">
-                            <h2 class="font-bold text-xl leading-[25px]">About {{$product->name}}</h2>
-                            <p class="font-semibold text-lg leading-[32px] text-patungan-grey">{{$product->about}}</p>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <h2 class="font-bold text-xl leading-[25px]">{{$product->name}} Feature’s</h2>
-                            <div class="flex flex-col gap-4">
-                                @foreach ( $product->keypoints as $k )
-                                <div class="flex items-center gap-2">
-                                    <img src="{{asset('assets/images/icons/verify-green.svg')}}" class="w-6 flex shrink-0" alt="icon">
-                                    <p class="font-semibold text-lg leading-[22px] text-patungan-grey">{{$k->name}}</p>
+
+                        <section class="space-y-3" aria-labelledby="about-product">
+                            <h2 id="about-product" class="text-xl font-bold">Tentang {{ $product->name }}</h2>
+                            <p class="break-words text-base font-medium leading-7 text-patungan-grey sm:text-lg sm:leading-8">{{ $product->about }}</p>
+                        </section>
+
+                        <section class="space-y-4" aria-labelledby="product-features">
+                            <h2 id="product-features" class="text-xl font-bold">Fitur {{ $product->name }}</h2>
+                            @forelse ($product->keypoints as $keypoint)
+                                <div class="flex items-start gap-3">
+                                    <img src="{{ asset('assets/images/icons/verify-green.svg') }}" class="mt-0.5 h-5 w-5 shrink-0" alt="" aria-hidden="true">
+                                    <p class="font-semibold leading-7 text-patungan-grey">{{ $keypoint->name }}</p>
                                 </div>
-                                @endforeach
-                                
-                            </div>
-                        </div>
+                            @empty
+                                <p class="font-medium text-patungan-grey">Informasi fitur akan segera tersedia.</p>
+                            @endforelse
+                        </section>
+
                         <hr class="border-patungan-border">
                         <div class="flex items-center gap-3">
-                            <img src="{{asset('assets/images/photos/Profiles.png')}}" class="h-9 flex shrink-0" alt="icon">
-                            <p class="font-semibold leading-5">5219+ <span class="text-patungan-grey">Users Has Joined 🔥</span> </p>
+                            <img src="{{ asset('assets/images/photos/Profiles.png') }}" class="h-9 w-auto shrink-0" alt="" aria-hidden="true">
+                            <p class="font-semibold">5.219+ <span class="text-patungan-grey">pengguna telah bergabung</span></p>
                         </div>
                     </div>
-                </div>
-                <div class="flex flex-col rounded-[32px] p-8 gap-6 bg-white">
-                    <div class="flex items-center rounded-full bg-patungan-bg-grey">
-                        <label class="tab-link flex justify-center items-center w-full rounded-full border border-transparent py-4 px-8 text-patungan-grey transition-all duration-300 has-[:checked]:bg-patungan-orange/10 has-[:checked]:text-patungan-orange has-[:checked]:border-patungan-orange/10" data-target-tab="#How-It-Works-Tab">
-                            <span class="font-bold text-lg leading-[22px]">How it Works</span>
-                            <input type="radio" name="tab" class="hidden" checked>
-                        </label>
-                        <label class="tab-link flex justify-center items-center w-full rounded-full border border-transparent py-4 px-8 text-patungan-grey transition-all duration-300  has-[:checked]:bg-patungan-orange/10 has-[:checked]:text-patungan-orange has-[:checked]:border-patungan-orange/10" data-target-tab="#Reviews-Tab">
-                            <span class="font-bold text-lg leading-[22px]">Reviews</span>
-                            <input type="radio" name="tab" class="hidden">
-                        </label>
+                </article>
+
+                <section class="surface-card motion-card reveal-on-scroll reveal-delay-1 space-y-6 p-5 sm:p-8" aria-labelledby="how-it-works-title">
+                    <div>
+                        <p class="section-kicker">Cara kerja</p>
+                        <h2 id="how-it-works-title" class="mt-2 text-2xl font-bold">Sebelum bergabung</h2>
                     </div>
-                    <hr class="border-patungan-border">
-                    <div class="flex">
-                        <div id="How-It-Works-Tab" class="tab-content flex flex-col gap-5">
-                            <ol class="font-semibold text-lg leading-9 text-patungan-grey list-decimal pl-5">
-                                <li>Setiap anggota grup memiliki tanggung jawab yang sama dalam memenuhi komitmen pembayaran.</li>
-                                <li>Pastikan pembayaran dilakukan sesuai tenggat waktu yang disepakati untuk kelancaran patungan.</li>
-                                <li>Setiap transaksi tercatat dan dapat diakses oleh semua anggota untuk memastikan keadilan.</li>
-                                <li>Keputusan mengenai produk, layanan, atau tujuan dilakukan melalui persetujuan bersama.</li>
-                                <li>Dana yang terkumpul akan langsung dialokasikan sesuai tujuan grup.</li>
-                            </ol>
-                            <div class="flex items-center rounded-xl p-4 gap-3 bg-patungan-red/10">
-                                <img src="{{asset('assets/images/icons/notification-box-red.svg')}}" class="w-[52px] h-[52px] flex shrink-0" alt="icon">
-                                <p class="font-semibold leading-[25px] text-patungan-red">The balance will be refunded if the required number of people is not met within the specified time.</p>
-                            </div>
-                        </div>
-                        <div id="Reviews-Tab" class="tab-content flex flex-col gap-5 hidden">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio laudantium officiis vitae veritatis dolorem atque in ipsum eius doloribus nulla illo est tempora quos, nobis ea quis consectetur incidunt maxime. Voluptatibus quod a rerum aut dolorem, illo ipsam provident dolore nemo laudantium fugiat, suscipit accusantium, et fugit natus eligendi corrupti?
-                        </div>
+                    <ol class="list-decimal space-y-3 pl-5 font-medium leading-7 text-patungan-grey sm:text-lg sm:leading-8">
+                        <li>Setiap anggota grup memiliki tanggung jawab yang sama dalam memenuhi komitmen pembayaran.</li>
+                        <li>Pastikan pembayaran dilakukan sesuai tenggat waktu yang disepakati untuk kelancaran patungan.</li>
+                        <li>Setiap transaksi tercatat dan dapat diakses oleh semua anggota untuk memastikan transparansi.</li>
+                        <li>Keputusan mengenai produk atau layanan dilakukan melalui persetujuan bersama.</li>
+                        <li>Dana yang terkumpul akan langsung dialokasikan sesuai tujuan grup.</li>
+                    </ol>
+                    <div class="flex items-start gap-3 rounded-2xl bg-patungan-red/10 p-4">
+                        <img src="{{ asset('assets/images/icons/notification-box-red.svg') }}" class="h-10 w-10 shrink-0 sm:h-[52px] sm:w-[52px]" alt="" aria-hidden="true">
+                        <p class="font-semibold leading-6 text-patungan-red sm:leading-7">Dana akan dikembalikan jika jumlah anggota yang dibutuhkan tidak terpenuhi dalam waktu yang ditentukan.</p>
                     </div>
-                </div>
+                </section>
             </div>
-            <div id="Price-Details" class="flex flex-col w-full h-fit rounded-[32px] p-8 gap-8 bg-white overflow-hidden">
-                <h2 class="font-bold text-xl leading-[25px]">Price Details</h2>
-                <div class="flex flex-col rounded-3xl border border-patungan-border p-6 gap-6">
-                    <div class="flex items-center justify-between">
-                        <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Original Price</p>
-                        <p class="font-bold text-xl leading-[25px]">Rp {{number_format($product->price,0,',','.')}}</p>
+
+            <aside class="surface-card motion-card reveal-on-scroll reveal-delay-2 min-w-0 p-5 sm:p-8 lg:sticky lg:top-28" aria-labelledby="price-details-title">
+                <h2 id="price-details-title" class="text-xl font-bold">Rincian Harga</h2>
+                <dl class="mt-6 space-y-4 rounded-2xl border border-patungan-border p-4 sm:rounded-3xl sm:p-6">
+                    <div class="flex items-start justify-between gap-4">
+                        <dt class="font-semibold text-patungan-grey">Harga asli</dt>
+                        <dd class="text-right font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</dd>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Harga Patungan</p>
-                        <p class="font-bold text-xl leading-[25px]">Rp {{number_format($product->price_per_person,0,',','.')}}</p>
+                    <div class="flex items-start justify-between gap-4">
+                        <dt class="font-semibold text-patungan-grey">Harga patungan</dt>
+                        <dd class="text-right font-bold">Rp {{ number_format($product->price_per_person, 0, ',', '.') }}</dd>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Durasi</p>
-                        <p class="font-bold text-xl leading-[25px]">{{$product->duration}}</p>
+                    <div class="flex items-start justify-between gap-4">
+                        <dt class="font-semibold text-patungan-grey">Durasi</dt>
+                        <dd class="text-right font-bold">{{ $product->duration }}</dd>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Group Capacity</p>
-                        <p class="font-bold text-xl leading-[25px]">{{$product->capacity}}</p>
+                    <div class="flex items-start justify-between gap-4">
+                        <dt class="font-semibold text-patungan-grey">Kapasitas grup</dt>
+                        <dd class="text-right font-bold">{{ $product->capacity }} orang</dd>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Biaya Admin</p>
-                        <p class="font-bold text-xl leading-[25px]">Rp {{number_format($totalPpn,0,',','.')}}</p>
+                    <div class="flex items-start justify-between gap-4">
+                        <dt class="font-semibold text-patungan-grey">Biaya admin</dt>
+                        <dd class="text-right font-bold">Rp {{ number_format($totalPpn, 0, ',', '.') }}</dd>
                     </div>
-                    <hr class="border-patungan-border">
-                    <div class="flex items-center justify-between">
-                        <p class="font-semibold text-lg leading-[22px] text-patungan-grey">Total Price</p>
-                        <p class="font-bold text-xl leading-[25px text-patungan-red">Rp {{number_format($grandTotal,0,',','.')}}</p>
+                    <div class="flex items-start justify-between gap-4 border-t border-patungan-border pt-4">
+                        <dt class="font-bold">Total</dt>
+                        <dd class="text-right text-xl font-extrabold text-patungan-red">Rp {{ number_format($grandTotal, 0, ',', '.') }}</dd>
                     </div>
-                </div>
-                <a href="{{route('front.booking', $product)}}" class="flex items-center rounded-full h-[60px] px-9 w-full gap-[6px] bg-patungan-orange justify-center">
-                    <span class="font-bold text-lg leading-5 text-white">Pesan Sekarang</span>
-                </a>
-            </div>
+                </dl>
+                <a href="{{ route('front.booking', $product) }}" class="btn-primary motion-glow mt-6 w-full">Pesan Sekarang</a>
+            </aside>
         </div>
     </main>
-
-    
-    @endsection
-    
-    @push('after-scripts')
-    <script src="{{asset('js/nav-tab.js')}}"></script>
-    
-    @endpush
+@endsection

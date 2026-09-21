@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Services\BookingService;
 use App\Services\FrontService;
-use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -20,16 +20,17 @@ class FrontController extends Controller
     public function index()
     {
         $data = $this->frontService->getFrontPageData();
+
         return view('front.index', $data);
     }
 
     public function details(Product $product)
     {
 
-        $ppn = 0.12;
-        $price = $product->price_per_person;
-        $totalPpn = $price * $ppn;
-        $grandTotal = $totalPpn + $price;
+        $amounts = BookingService::calculateAmounts((int) $product->price_per_person);
+        $totalPpn = $amounts['admin_fee'];
+        $grandTotal = $amounts['total'];
+
         return view('front.details', compact('product', 'grandTotal', 'totalPpn'));
     }
 }

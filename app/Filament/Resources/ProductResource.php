@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
@@ -26,102 +25,114 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                
+
                 Fieldset::make('Details')
-                ->schema([
-                    Forms\Components\TextInput::make('name')
-                        ->required()
-                        ->maxLength(255),
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
 
-                    Forms\Components\TextInput::make('tagline')
-                        ->required()
-                        ->maxLength(255),
+                        Forms\Components\TextInput::make('tagline')
+                            ->required()
+                            ->maxLength(255),
 
-                    Forms\Components\FileUpload::make('thumbnail')
-                        ->image()
-                        ->required(),
+                        Forms\Components\FileUpload::make('thumbnail')
+                            ->disk(config('filesystems.product_media_disk'))
+                            ->directory('products/thumbnails')
+                            ->visibility('public')
+                            ->maxSize(4096)
+                            ->image()
+                            ->required(),
 
-                    Forms\Components\FileUpload::make('photo')
-                        ->image()
-                        ->required(),
+                        Forms\Components\FileUpload::make('photo')
+                            ->disk(config('filesystems.product_media_disk'))
+                            ->directory('products/photos')
+                            ->visibility('public')
+                            ->maxSize(4096)
+                            ->image()
+                            ->required(),
 
-                    Forms\Components\TextInput::make('price')
-                        ->required()
-                        ->numeric()
-                        ->prefix('IDR')
-                        ->live()
-                        ->afterStateUpdated(function (callable $get, callable $set){
-                            $price = $get('price');
-                            $capacity = $get('capacity');
-                            if ($capacity > 0) {
-                                $set('price_per_person', $price / $capacity);
-                            }else{
-                                $set('price_per_person', null);
-                            }
-                        }),
-                    
+                        Forms\Components\TextInput::make('price')
+                            ->required()
+                            ->numeric()
+                            ->integer()
+                            ->minValue(1)
+                            ->prefix('IDR')
+                            ->live()
+                            ->afterStateUpdated(function (callable $get, callable $set) {
+                                $price = $get('price');
+                                $capacity = $get('capacity');
+                                if ($capacity > 0) {
+                                    $set('price_per_person', (int) ceil($price / $capacity));
+                                } else {
+                                    $set('price_per_person', null);
+                                }
+                            }),
+
                         Forms\Components\TextInput::make('capacity')
-                        ->required()
-                        ->numeric()
-                        ->prefix('People')
-                        ->live()
-                        ->afterStateUpdated(function (callable $get, callable $set){
-                            $price = $get('price');
-                            $capacity = $get('capacity');
-                            if ($capacity > 0) {
-                                $set('price_per_person', $price / $capacity);
-                            }else{
-                                $set('price_per_person', null);
-                            }
-                        }),
+                            ->required()
+                            ->numeric()
+                            ->integer()
+                            ->minValue(1)
+                            ->prefix('People')
+                            ->live()
+                            ->afterStateUpdated(function (callable $get, callable $set) {
+                                $price = $get('price');
+                                $capacity = $get('capacity');
+                                if ($capacity > 0) {
+                                    $set('price_per_person', (int) ceil($price / $capacity));
+                                } else {
+                                    $set('price_per_person', null);
+                                }
+                            }),
 
                         Forms\Components\TextInput::make('price_per_person')
-                        ->required()
-                        ->readOnly()
-                        ->prefix('IDR')
-                        ->live()
-                        ->afterStateHydrated(function (callable $get, callable $set){
-                            $price = $get('price');
-                            $capacity = $get('capacity');
-                            if ($capacity > 0) {
-                                $set('price_per_person', $price / $capacity);
-                            }else{
-                                $set('price_per_person', null);
-                            }
-                        }),
+                            ->required()
+                            ->readOnly()
+                            ->numeric()
+                            ->prefix('IDR')
+                            ->live()
+                            ->afterStateHydrated(function (callable $get, callable $set) {
+                                $price = $get('price');
+                                $capacity = $get('capacity');
+                                if ($capacity > 0) {
+                                    $set('price_per_person', (int) ceil($price / $capacity));
+                                } else {
+                                    $set('price_per_person', null);
+                                }
+                            }),
 
                         Forms\Components\Select::make('duration')
-                        ->required()
-                        ->options([
-                            '1 Jam' => '1 Jam',
-                            '1 Hari' => '1 Hari',
-                            '1 Minggu' => '1 Minggu',
-                            '1 Bulan' => '1 Bulan',
-                            '1 Tahun' => '1 Tahun',
-                        ])
-                        ->placeholder('Pilih Durasi')
-                        ->prefix('Month '),
+                            ->required()
+                            ->options([
+                                '1 Jam' => '1 Jam',
+                                '1 Hari' => '1 Hari',
+                                '1 Minggu' => '1 Minggu',
+                                '1 Bulan' => '1 Bulan',
+                                '1 Tahun' => '1 Tahun',
+                            ])
+                            ->placeholder('Pilih durasi'),
 
-                        ]),
+                    ]),
 
                 Fieldset::make('Additional')
-                ->schema([
-                    Forms\Components\Textarea::make('about')
-                        ->required(),
-                    
-                    Forms\Components\Repeater::make('keypoints')
-                        ->relationship('keypoints')
-                        ->schema([
-                            Forms\Components\TextInput::make('name')
-                                ->required(),
-                        ]),
-                    
-                    Forms\Components\Select::make('is_popular')
-                    ->options([
-                     true => 'Popular',
-                     false => 'Not Popular',
-                    ])
-                    ->required(),
+                    ->schema([
+                        Forms\Components\Textarea::make('about')
+                            ->required(),
+
+                        Forms\Components\Repeater::make('keypoints')
+                            ->relationship('keypoints')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->required(),
+                            ]),
+
+                        Forms\Components\Select::make('is_popular')
+                            ->options([
+                                true => 'Popular',
+                                false => 'Not Popular',
+                            ])
+                            ->required(),
                     ]),
 
             ]);
@@ -131,8 +142,9 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                
-                Tables\Columns\ImageColumn::make('thumbnail'),
+
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->disk(config('filesystems.product_media_disk')),
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('price_per_person');
             $table->unsignedBigInteger('duration');
             $table->unsignedBigInteger('capacity');
-            
+
             $table->boolean('is_popular');
 
             $table->softDeletes();
@@ -39,6 +39,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // These two historical migrations share a timestamp, so products is
+        // rolled back before product_keypoints. Drop the dependent table first
+        // to keep rollback portable to databases that enforce foreign keys.
+        Schema::dropIfExists('product_keypoints');
         Schema::dropIfExists('products');
     }
 };

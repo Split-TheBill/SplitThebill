@@ -20,16 +20,16 @@ class ProductSubscriptionStats extends BaseWidget
             Stat::make('Total Transactions', $totalTransactions)
                 ->description('All transactions')
                 ->descriptionIcon('heroicon-o-currency-dollar'),
-            
+
             Stat::make('Approved Transactions', $approvedTransactions)
                 ->description('Approved transactions')
                 ->descriptionIcon('heroicon-o-check-circle')
                 ->color('success'),
 
-            Stat::make('Total Revenue','IDR'  . number_format($totalRevenue))
-            ->description('Revenue from approved transactions')
-            ->descriptionIcon('heroicon-o-check-circle')
-            ->color('success'),
+            Stat::make('Total Revenue', 'IDR'.number_format($totalRevenue))
+                ->description('Revenue from approved transactions')
+                ->descriptionIcon('heroicon-o-check-circle')
+                ->color('success'),
         ];
     }
 }

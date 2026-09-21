@@ -8,7 +8,7 @@ use App\Http\Requests\StorePaymentRequest;
 use App\Models\Product;
 use App\Models\ProductSubscription;
 use App\Services\BookingService;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class BookingController extends Controller
 {
@@ -23,9 +23,9 @@ class BookingController extends Controller
 
     public function booking(Product $product)
     {
-        $tax = 0.10;
-        $totalTaxAmount = $tax * $product->price_per_person;
-        $grandTotalAmount = $product->price_per_person + $totalTaxAmount;
+        $amounts = BookingService::calculateAmounts((int) $product->price_per_person);
+        $totalTaxAmount = $amounts['admin_fee'];
+        $grandTotalAmount = $amounts['total'];
 
         return view('booking.booking', compact('product', 'totalTaxAmount', 'grandTotalAmount'));
     }
@@ -34,10 +34,10 @@ class BookingController extends Controller
     {
         $validated = $request->validated();
 
-        try{
+        try {
             $this->bookingService->storeBookingInSession($product, $validated);
-        }catch (\Exception $e){
-            return redirect()->back()->withErrors(['error'=> 'Failed to store booking. Please try again. ']);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Data pesanan gagal disimpan. Silakan coba lagi.']);
         }
 
         return redirect()->route('front.payment');
@@ -45,9 +45,16 @@ class BookingController extends Controller
 
     public function payment()
     {
-        
+
         $data = $this->bookingService->payment();
-        return view('booking.payment',  $data);
+
+        if (! $data) {
+            return redirect()
+                ->route('front.index')
+                ->withErrors(['error' => 'Sesi pemesanan telah berakhir. Silakan pilih kembali layananmu.']);
+        }
+
+        return view('booking.payment', $data);
     }
 
     public function paymentStore(StorePaymentRequest $request)
@@ -55,11 +62,15 @@ class BookingController extends Controller
         $validated = $request->validated();
         $bookingTransactionId = $this->bookingService->paymentStore($validated);
 
-        if($bookingTransactionId){
-            return redirect()->route('front.booking_finished', $bookingTransactionId);
+        if ($bookingTransactionId) {
+            return redirect()->to(URL::temporarySignedRoute(
+                'front.booking_finished',
+                now()->addMinutes(30),
+                ['productSubscription' => $bookingTransactionId],
+            ));
         }
 
-        return redirect()->route('front.index')->withErrors(['error' =>'Payment Failed. Please try again. ']);
+        return redirect()->route('front.index')->withErrors(['error' => 'Pembayaran gagal dikirim. Silakan coba lagi.']);
     }
 
     public function bookingFinished(ProductSubscription $productSubscription)
@@ -67,7 +78,8 @@ class BookingController extends Controller
         return view('booking.booking_finished', compact('productSubscription'));
     }
 
-    public function checkBooking(){
+    public function checkBooking()
+    {
         return view('booking.check_booking');
     }
 
@@ -77,12 +89,12 @@ class BookingController extends Controller
 
         $bookingData = $this->bookingService->getBookingDetailsWithGroupAndCapacity($validated);
 
-        // dd($bookingData);
-
-        if($bookingData){
+        if ($bookingData) {
             return view('booking.check_booking_details', $bookingData);
         }
 
-        return redirect()->route('front.check_booking')->withErrors(['error'=>'Transaction not found']);
+        return redirect()->route('front.check_booking')->withErrors([
+            'error' => 'Pesanan tidak ditemukan. Periksa kembali kode booking dan nomor WhatsApp.',
+        ]);
     }
 }
