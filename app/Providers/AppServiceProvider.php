@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Database\NeonPostgresConnector;
 use App\Filesystem\DatabaseFilesystemAdapter;
 use App\Models\ProductSubscription;
 use App\Observers\ProductSubscriptionObserver;
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind('db.connector.pgsql', fn () => new NeonPostgresConnector);
     }
 
     /**

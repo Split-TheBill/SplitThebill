@@ -8,6 +8,13 @@ $mysqlSslCaAttribute = extension_loaded('pdo_mysql')
         : constant('PDO::MYSQL_ATTR_SSL_CA'))
     : null;
 
+$postgresUrl = env('DB_URL', env('DATABASE_URL_UNPOOLED', env('DATABASE_URL')));
+$postgresHost = is_string($postgresUrl) ? parse_url($postgresUrl, PHP_URL_HOST) : null;
+$neonEndpoint = is_string($postgresHost) && str_ends_with($postgresHost, '.neon.tech')
+    ? Str::before($postgresHost, '.')
+    : null;
+$neonEndpoint = is_string($neonEndpoint) ? Str::beforeLast($neonEndpoint, '-pooler') : null;
+
 return [
 
     /*
@@ -90,7 +97,7 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DB_URL', env('DATABASE_URL_UNPOOLED', env('DATABASE_URL'))),
+            'url' => $postgresUrl,
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'laravel'),
@@ -101,6 +108,7 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
+            'neon_endpoint' => $neonEndpoint,
         ],
 
         'sqlsrv' => [
