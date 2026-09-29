@@ -47,8 +47,8 @@
     <x-navbar />
 
     <main id="main-content">
-        <header class="relative isolate overflow-hidden">
-            <div class="motion-glow absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(255,12,129,0.14),transparent_36%),radial-gradient(circle_at_bottom_left,rgba(226,85,32,0.12),transparent_32%)]"></div>
+        <header class="relative isolate overflow-hidden" data-interactive-hero>
+            <div class="hero-ambient absolute -z-10" data-hero-ambient aria-hidden="true"></div>
             <div class="site-shell flex min-h-[620px] flex-col items-center justify-center py-16 text-center sm:min-h-[680px] sm:py-20 lg:min-h-[720px]">
                 <div class="reveal-on-scroll inline-flex max-w-full items-center gap-3 rounded-full bg-patungan-black px-4 py-2 text-left text-sm font-semibold text-white sm:px-5 sm:text-base">
                     <img src="{{ asset('assets/images/photos/Profiles.png') }}" class="motion-float h-8 w-auto shrink-0 sm:h-9" alt="">
@@ -67,7 +67,7 @@
                 <div class="reveal-on-scroll reveal-delay-3 mt-9 flex w-full max-w-lg flex-col justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4">
                     <a href="#Products" class="btn-primary">
                         Lihat Layanan
-                        <img src="{{ asset('assets/images/icons/arrow-right-white.svg') }}" class="h-5 w-5" alt="">
+                        <img src="{{ asset('assets/images/icons/arrow-right-white.svg') }}" class="cta-arrow h-5 w-5" alt="">
                     </a>
                     <a href="#How-It-Works" class="btn-secondary">Pelajari Cara Pesan</a>
                 </div>
@@ -76,9 +76,12 @@
 
         <section aria-label="Statistik Split TheBill" class="reveal-on-scroll bg-patungan-black text-white">
             <div class="site-shell grid grid-cols-2 gap-px bg-white/10 py-1 sm:grid-cols-4">
-                @foreach ([['2.209+', 'Total pengguna'], ['9/10', 'Pelanggan puas'], ['12', 'Layanan'], ['4.920+', 'Transaksi']] as [$value, $label])
+                @foreach ([[2209, '+', 'Total pengguna'], [9, '/10', 'Pelanggan puas'], [12, '', 'Layanan'], [4920, '+', 'Transaksi']] as [$count, $suffix, $label])
                     <div class="flex flex-col items-center bg-patungan-black px-3 py-8 text-center sm:py-10">
-                        <strong class="font-Grifter text-3xl sm:text-4xl">{{ $value }}</strong>
+                        <strong class="font-Grifter text-3xl sm:text-4xl">
+                            <span aria-hidden="true" data-count-to="{{ $count }}" data-count-suffix="{{ $suffix }}">{{ number_format($count, 0, ',', '.') }}{{ $suffix }}</span>
+                            <span class="sr-only">{{ number_format($count, 0, ',', '.') }}{{ $suffix }}</span>
+                        </strong>
                         <span class="mt-2 text-sm font-semibold text-patungan-violet sm:text-base">{{ $label }}</span>
                     </div>
                 @endforeach
@@ -107,9 +110,9 @@
                 @else
                     <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         @foreach ($newProducts->take(6) as $product)
-                            <article class="surface-card motion-card reveal-on-scroll flex min-w-0 flex-col overflow-hidden">
+                            <article class="surface-card motion-card product-card reveal-on-scroll flex min-w-0 flex-col overflow-hidden">
                                 <a href="{{ route('front.details', $product) }}" class="block aspect-[16/9] overflow-hidden bg-[#D9D9D9]">
-                                    <img src="{{ $product->thumbnail_url }}" class="h-full w-full object-cover transition duration-300 hover:scale-105" alt="{{ $product->name }}">
+                                    <img src="{{ $product->thumbnail_url }}" class="product-card__image h-full w-full object-cover" alt="{{ $product->name }}">
                                 </a>
                                 <div class="flex flex-1 flex-col p-5 sm:p-6">
                                     <div class="flex min-w-0 items-center gap-3">
@@ -163,14 +166,14 @@
 
                 <div class="grid gap-6">
                     @foreach ($steps as $step)
-                        <article class="surface-card motion-card reveal-on-scroll grid overflow-hidden sm:grid-cols-[1fr_220px]">
+                        <article class="surface-card motion-card step-card reveal-on-scroll grid overflow-hidden sm:grid-cols-[1fr_220px]">
                             <div class="p-6 sm:p-8">
-                                <span class="inline-flex h-12 min-w-12 items-center justify-center rounded-full bg-patungan-black px-3 font-Grifter text-lg text-white">{{ $step['number'] }}</span>
+                                <span class="step-card__number inline-flex h-12 min-w-12 items-center justify-center rounded-full bg-patungan-black px-3 font-Grifter text-lg text-white">{{ $step['number'] }}</span>
                                 <h3 class="mt-5 text-2xl font-bold">{{ $step['title'] }}</h3>
                                 <p class="mt-3 leading-7 text-patungan-grey">{{ $step['description'] }}</p>
                             </div>
                             <div class="h-52 overflow-hidden bg-patungan-bg-grey sm:h-full sm:min-h-64">
-                                <img src="{{ asset($step['image']) }}" class="motion-float h-full w-full object-cover object-top" alt="Ilustrasi {{ strtolower($step['title']) }}">
+                                <img src="{{ asset($step['image']) }}" class="step-card__image h-full w-full object-cover object-top" alt="Ilustrasi {{ strtolower($step['title']) }}">
                             </div>
                         </article>
                     @endforeach
@@ -205,7 +208,7 @@
 
                 <div class="reveal-on-scroll reveal-delay-1 mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                     @foreach ($testimonials as $testimonial)
-                        <figure class="surface-card motion-card flex h-full flex-col p-6 sm:p-7">
+                        <figure class="surface-card motion-card testimonial-card flex h-full flex-col p-6 sm:p-7">
                             <div class="flex items-center gap-3">
                                 <img src="{{ asset('assets/images/photos/' . $testimonial['photo']) }}" class="h-12 w-12 rounded-full object-cover" alt="Foto {{ $testimonial['name'] }}">
                                 <figcaption>
@@ -234,7 +237,7 @@
 
                 <div class="reveal-on-scroll reveal-delay-1 mx-auto mt-10 grid max-w-5xl gap-4 lg:grid-cols-2">
                     @foreach ($faqs as $index => $faq)
-                        <details class="group surface-card motion-card overflow-hidden" @if ($index === 0) open @endif>
+                        <details class="group surface-card motion-card faq-item overflow-hidden" @if ($index === 0) open @endif>
                             <summary class="flex cursor-pointer list-none items-start justify-between gap-4 p-5 font-bold sm:p-6">
                                 <span class="flex gap-3">
                                     <span class="text-patungan-grey">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
@@ -254,7 +257,8 @@
         <div class="site-shell reveal-on-scroll">
             <div class="grid gap-10 md:grid-cols-[1.25fr_0.75fr_0.75fr]">
                 <div class="max-w-md">
-                    <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="h-10 w-auto" alt="Split TheBill">
+                    <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="brand-logo--light h-10 w-auto" alt="Split TheBill">
+                    <img src="{{ asset('assets/images/logos/logos.svg') }}" class="brand-logo--dark h-10 w-auto" alt="Split TheBill">
                     <p class="mt-5 leading-7 text-patungan-grey">Berbagi biaya langganan premium dengan alur yang lebih mudah, transparan, dan terjangkau.</p>
                 </div>
 

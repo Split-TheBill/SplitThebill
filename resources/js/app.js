@@ -79,17 +79,36 @@ const mobileMenu = document.querySelector('[data-mobile-menu]');
 if (menuButton && mobileMenu) {
     const closeMenu = () => {
         mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('mobile-navigation-enter');
         menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Buka menu navigasi');
     };
 
     menuButton.addEventListener('click', () => {
         const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
         mobileMenu.classList.toggle('hidden', isOpen);
+        mobileMenu.classList.toggle('mobile-navigation-enter', !isOpen);
         menuButton.setAttribute('aria-expanded', String(!isOpen));
+        menuButton.setAttribute('aria-label', isOpen ? 'Buka menu navigasi' : 'Tutup menu navigasi');
     });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+            closeMenu();
+            menuButton.focus();
+        }
+    });
+
+    document.addEventListener('pointerdown', (event) => {
+        if (menuButton.getAttribute('aria-expanded') === 'true'
+            && !menuButton.contains(event.target)
+            && !mobileMenu.contains(event.target)) {
+            closeMenu();
+        }
     });
 
     window.addEventListener('resize', () => {
@@ -99,7 +118,8 @@ if (menuButton && mobileMenu) {
     });
 }
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reducedMotionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+const prefersReducedMotion = reducedMotionMediaQuery.matches;
 const revealSelectors = [
     '.reveal-on-scroll',
     '#main-content > header',
@@ -155,4 +175,74 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
     });
 
     revealElements.forEach((element) => revealObserver.observe(element));
+}
+
+const hero = document.querySelector('[data-interactive-hero]');
+const heroAmbient = hero?.querySelector('[data-hero-ambient]');
+
+if (hero && heroAmbient && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let pointerFrame = 0;
+    let nextX = 0;
+    let nextY = 0;
+
+    const updateHeroAmbient = () => {
+        heroAmbient.style.setProperty('--hero-x', `${nextX}px`);
+        heroAmbient.style.setProperty('--hero-y', `${nextY}px`);
+        pointerFrame = 0;
+    };
+
+    hero.addEventListener('pointermove', (event) => {
+        if (reducedMotionMediaQuery.matches) return;
+
+        const bounds = hero.getBoundingClientRect();
+        nextX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 36;
+        nextY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 36;
+
+        if (!pointerFrame) {
+            pointerFrame = window.requestAnimationFrame(updateHeroAmbient);
+        }
+    }, { passive: true });
+
+    hero.addEventListener('pointerleave', () => {
+        if (pointerFrame) window.cancelAnimationFrame(pointerFrame);
+        pointerFrame = 0;
+        nextX = 0;
+        nextY = 0;
+        updateHeroAmbient();
+    });
+}
+
+const counters = document.querySelectorAll('[data-count-to]');
+
+if (!prefersReducedMotion && 'IntersectionObserver' in window && counters.length) {
+    const formatter = new Intl.NumberFormat('id-ID');
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            observer.unobserve(entry.target);
+            const counter = entry.target;
+            const target = Number(counter.dataset.countTo);
+            const suffix = counter.dataset.countSuffix || '';
+            const start = performance.now();
+            const duration = 1200;
+
+            const tick = (now) => {
+                if (reducedMotionMediaQuery.matches) {
+                    counter.textContent = `${formatter.format(target)}${suffix}`;
+                    return;
+                }
+
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                counter.textContent = `${formatter.format(Math.round(target * eased))}${suffix}`;
+
+                if (progress < 1) window.requestAnimationFrame(tick);
+            };
+
+            window.requestAnimationFrame(tick);
+        });
+    }, { threshold: 0.35 });
+
+    counters.forEach((counter) => counterObserver.observe(counter));
 }

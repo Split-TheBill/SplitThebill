@@ -3,7 +3,8 @@
 <nav class="sticky top-0 z-50 border-b border-white/60 bg-white/90 backdrop-blur-xl" aria-label="Navigasi utama">
     <div class="site-shell flex min-h-20 items-center justify-between gap-4 py-3">
         <a href="{{ route('front.index') }}" class="shrink-0" aria-label="Split TheBill — Beranda">
-            <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="h-9 w-auto sm:h-10" alt="Split TheBill">
+            <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="brand-logo--light h-9 w-auto sm:h-10" alt="Split TheBill">
+            <img src="{{ asset('assets/images/logos/logos.svg') }}" class="brand-logo--dark h-9 w-auto sm:h-10" alt="Split TheBill">
         </a>
 
         <ul class="hidden items-center gap-6 lg:flex">

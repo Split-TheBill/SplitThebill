@@ -315,7 +315,18 @@ div.group:has(input[type="radio"]:checked),
     border-color: var(--brand-accent) !important;
 }
 
-[data-theme="dark"] img[src*="logos/logoo.svg"],
+[data-theme="dark"] .brand-logo--light {
+    display: none;
+}
+
+.brand-logo--dark {
+    display: none;
+}
+
+[data-theme="dark"] .brand-logo--dark {
+    display: block;
+}
+
 [data-theme="dark"] img[src*="-black.svg"],
 [data-theme="dark"] img[src*="receipt-text-orange-fill-1.svg"] {
     filter: brightness(0) invert(1);
@@ -387,7 +398,14 @@ div.group:has(input[type="radio"]:checked),
         transform: rotate(0deg) scale(1);
     }
 
-    :root:not([data-theme]) img[src*="logos/logoo.svg"],
+    :root:not([data-theme]) .brand-logo--light {
+        display: none;
+    }
+
+    :root:not([data-theme]) .brand-logo--dark {
+        display: block;
+    }
+
     :root:not([data-theme]) img[src*="-black.svg"],
     :root:not([data-theme]) img[src*="receipt-text-orange-fill-1.svg"] {
         filter: brightness(0) invert(1);
@@ -490,6 +508,93 @@ body:has([data-navbar-theme-toggle]) .theme-toggle--floating {
     animation: stb-ambient-glow 7s ease-in-out infinite;
 }
 
+/* Layered homepage motion keeps the content still while the background reacts to a pointer. */
+.hero-ambient {
+    inset: -2rem;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 76% 22%, rgba(255, 12, 129, 0.18), transparent 34%),
+        radial-gradient(circle at 21% 77%, rgba(226, 85, 32, 0.15), transparent 34%);
+    transform: translate3d(var(--hero-x, 0px), var(--hero-y, 0px), 0);
+    transition: transform 350ms ease-out;
+    animation: stb-hero-breathe 7s ease-in-out infinite;
+}
+
+.cta-arrow,
+.product-card__image,
+.step-card__image,
+.step-card__number {
+    transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-item {
+    border: 1px solid transparent;
+}
+
+.faq-item[open] {
+    border-color: var(--brand-border);
+    box-shadow: 0 20px 50px var(--brand-shadow);
+}
+
+.faq-item[open] > p {
+    animation: stb-faq-open 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.faq-item[open] > summary > span:last-child {
+    color: var(--brand-accent);
+}
+
+.mobile-navigation-enter {
+    animation: stb-menu-enter 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover .cta-arrow {
+        transform: translateX(5px);
+    }
+
+    .product-card:hover .product-card__image {
+        transform: scale(1.055);
+    }
+
+    .step-card:hover .step-card__image {
+        transform: scale(1.045);
+    }
+
+    .step-card:hover .step-card__number {
+        transform: rotate(-6deg) scale(1.08);
+    }
+
+    .testimonial-card:hover [aria-label="5 dari 5 bintang"] img {
+        animation: stb-star-pop 430ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .testimonial-card:hover [aria-label="5 dari 5 bintang"] img:nth-child(2) { animation-delay: 45ms; }
+    .testimonial-card:hover [aria-label="5 dari 5 bintang"] img:nth-child(3) { animation-delay: 90ms; }
+    .testimonial-card:hover [aria-label="5 dari 5 bintang"] img:nth-child(4) { animation-delay: 135ms; }
+    .testimonial-card:hover [aria-label="5 dari 5 bintang"] img:nth-child(5) { animation-delay: 180ms; }
+}
+
+@keyframes stb-hero-breathe {
+    0%, 100% { opacity: 0.78; }
+    50% { opacity: 1; }
+}
+
+@keyframes stb-faq-open {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stb-menu-enter {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stb-star-pop {
+    from { transform: translateY(2px) scale(0.8); }
+    to { transform: translateY(0) scale(1); }
+}
+
 @keyframes stb-shimmer {
     0%, 68% {
         transform: skewX(-18deg) translateX(0);
@@ -548,6 +653,10 @@ body:has([data-navbar-theme-toggle]) .theme-toggle--floating {
 
     .motion-ready [data-reveal] {
         opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .hero-ambient {
         transform: none !important;
     }
 }
