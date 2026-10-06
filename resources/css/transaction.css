@@ -1,0 +1,109 @@
+/* Keep the ordering flow in the same paper-and-ledger language as the landing. */
+.transaction-screen {
+    background: var(--brand-surface);
+    color: var(--brand-ink);
+}
+
+.transaction-page :is(.surface-card, .transaction-panel, .transaction-order-card) {
+    border: 1px solid var(--brand-border);
+    border-radius: 4px;
+    background: var(--brand-card);
+    box-shadow: none;
+}
+
+.transaction-page :is(.rounded-2xl, .rounded-3xl, [class~="sm:rounded-3xl"], [class~="rounded-[32px]"], [class~="sm:rounded-[48px]"]) {
+    border-radius: 4px;
+}
+
+.transaction-page :is(.btn-primary, .btn-secondary, .form-control, .tab-link) {
+    border-radius: 4px;
+}
+
+.transaction-page > header:not(.text-center) {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--brand-border);
+}
+
+.transaction-page .section-title {
+    font-size: clamp(28px, 3.4vw, 42px);
+    letter-spacing: -0.045em;
+}
+
+.transaction-page .section-kicker {
+    font: 10px/1.5 ui-monospace, "SFMono-Regular", Consolas, monospace;
+    letter-spacing: 0.08em;
+}
+
+.transaction-screen__main {
+    gap: 40px;
+}
+
+.transaction-brand {
+    align-self: stretch;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--brand-border);
+}
+
+.transaction-panel__heading {
+    text-align: left;
+}
+
+.transaction-page .transaction-panel__icon {
+    width: 40px;
+    height: 40px;
+    margin-inline: 0;
+}
+
+.transaction-home-link {
+    width: 100%;
+    padding-top: 22px;
+    border-top: 1px solid var(--brand-border);
+    color: var(--brand-ink);
+    font-size: 13px;
+}
+
+.transaction-home-link:hover {
+    color: var(--brand-accent);
+}
+
+.transaction-notice {
+    border-bottom: 1px solid var(--brand-border);
+    background: var(--brand-subtle);
+    color: var(--brand-ink);
+}
+
+.transaction-reference {
+    border-bottom: 1px dashed var(--brand-border);
+    background: var(--brand-subtle);
+    color: var(--brand-ink);
+}
+
+.transaction-reference__label {
+    color: var(--brand-muted);
+    font: 10px/1.5 ui-monospace, "SFMono-Regular", Consolas, monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.transaction-reference__value {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    letter-spacing: -0.04em;
+}
+
+.transaction-pending-status {
+    border: 1px solid var(--brand-border);
+    border-radius: 4px;
+    background: var(--brand-subtle);
+    color: var(--brand-ink);
+}
+
+.transaction-page .tab-link {
+    border: 1px solid var(--brand-border);
+}
+
+@media (max-width: 767px) {
+    .transaction-screen__main { gap: 32px; }
+    .transaction-brand { padding-bottom: 20px; }
+    .transaction-page > header:not(.text-center) { padding-bottom: 20px; }
+    .transaction-panel { padding: 24px 20px; }
+}

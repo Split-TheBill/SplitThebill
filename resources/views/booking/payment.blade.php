@@ -6,7 +6,7 @@
     <x-navbar />
 
     @if (empty($product) || empty($booking))
-        <main id="main-content" class="site-shell flex min-h-[60vh] items-center justify-center py-12">
+        <main id="main-content" class="transaction-page site-shell flex min-h-[60vh] items-center justify-center py-12">
             <section class="surface-card motion-card reveal-on-scroll w-full max-w-xl p-6 text-center sm:p-10" role="alert">
                 <h1 class="section-title">Data booking tidak ditemukan</h1>
                 <p class="mt-4 font-medium leading-7 text-patungan-grey">Sesi booking kamu sudah berakhir atau belum dibuat. Silakan pilih layanan kembali untuk melanjutkan.</p>
@@ -14,7 +14,7 @@
             </section>
         </main>
     @else
-        <main id="main-content" class="site-shell py-8 sm:py-10 lg:py-14">
+        <main id="main-content" class="transaction-page site-shell py-8 sm:py-10 lg:py-14">
             <header class="reveal-on-scroll mb-8 space-y-4 sm:mb-10">
                 <nav aria-label="Breadcrumb">
                     <ol class="flex flex-wrap items-center gap-2 text-sm font-semibold text-patungan-grey sm:text-base">

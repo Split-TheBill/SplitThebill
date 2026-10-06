@@ -5,7 +5,7 @@
 @section('content')
     <x-navbar />
 
-    <main id="main-content" class="site-shell py-8 sm:py-10 lg:py-14">
+    <main id="main-content" class="transaction-page site-shell py-8 sm:py-10 lg:py-14">
         <header class="reveal-on-scroll mb-8 space-y-4 sm:mb-10">
             <nav aria-label="Breadcrumb">
                 <ol class="flex flex-wrap items-center gap-2 text-sm font-semibold text-patungan-grey sm:text-base">

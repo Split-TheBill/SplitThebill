@@ -1,19 +1,19 @@
 <a href="#main-content" class="skip-link">Lewati ke konten</a>
 
-<nav class="sticky top-0 z-50 border-b border-white/60 bg-white/90 backdrop-blur-xl" aria-label="Navigasi utama">
-    <div class="site-shell flex min-h-20 items-center justify-between gap-4 py-3">
-        <a href="{{ route('front.index') }}" class="shrink-0" aria-label="Split TheBill — Beranda">
-            <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="brand-logo--light h-9 w-auto sm:h-10" alt="Split TheBill">
-            <img src="{{ asset('assets/images/logos/logos.svg') }}" class="brand-logo--dark h-9 w-auto sm:h-10" alt="Split TheBill">
+<nav class="site-nav" aria-label="Navigasi utama">
+    <div class="stb-shell nav-inner">
+        <a href="{{ route('front.index') }}" class="nav-brand" aria-label="Split TheBill — Beranda">
+            <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="brand-logo--light nav-logo" alt="Split TheBill">
+            <img src="{{ asset('assets/images/logos/logos.svg') }}" class="brand-logo--dark nav-logo" alt="Split TheBill">
         </a>
 
-        <ul class="hidden items-center gap-7 lg:flex">
-            <li><a href="{{ route('front.index') }}#Products" class="font-semibold text-patungan-grey transition hover:text-patungan-black">Layanan</a></li>
-            <li><a href="{{ route('front.index') }}#How-It-Works" class="font-semibold text-patungan-grey transition hover:text-patungan-black">Cara Pesan</a></li>
-            <li><a href="{{ route('front.index') }}#Resources" class="font-semibold text-patungan-grey transition hover:text-patungan-black">Resource</a></li>
+        <ul class="nav-links">
+            <li><a href="{{ route('front.index') }}#Products"><span>01</span> Layanan</a></li>
+            <li><a href="{{ route('front.index') }}#How-It-Works"><span>02</span> Cara Pesan</a></li>
+            <li><a href="{{ route('front.index') }}#Resources"><span>03</span> Resource</a></li>
         </ul>
 
-        <div class="flex items-center gap-2 sm:gap-3">
+        <div class="nav-actions">
             <button
                 type="button"
                 class="theme-toggle theme-toggle--navbar"
@@ -33,12 +33,11 @@
                 <span class="sr-only" data-theme-toggle-label>Aktifkan mode gelap</span>
             </button>
 
-            <a href="{{ route('front.check_booking') }}" class="btn-primary hidden min-h-11 px-5 py-2 text-sm sm:inline-flex sm:min-h-12 sm:px-6">
-                <img src="{{ asset('assets/images/icons/receipt-text-white.svg') }}" class="h-5 w-5" alt="">
-                <span>Pesanan Saya</span>
+            <a href="{{ route('front.check_booking') }}" class="nav-order">
+                <span>Pesanan Saya</span><span aria-hidden="true">↗</span>
             </a>
 
-            <button type="button" data-mobile-menu-button aria-expanded="false" aria-controls="mobile-navigation" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-patungan-border bg-white lg:hidden" aria-label="Buka menu navigasi">
+            <button type="button" data-mobile-menu-button aria-expanded="false" aria-controls="mobile-navigation" class="nav-menu-toggle" aria-label="Buka menu navigasi">
                 <svg viewBox="0 0 24 24" class="h-6 w-6" aria-hidden="true">
                     <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
                 </svg>
@@ -46,12 +45,12 @@
         </div>
     </div>
 
-    <div id="mobile-navigation" data-mobile-menu class="hidden border-t border-patungan-border bg-white lg:hidden">
-        <div class="site-shell flex flex-col gap-1 py-4">
-            <a href="{{ route('front.index') }}#Products" class="rounded-2xl px-4 py-3 font-semibold hover:bg-patungan-bg-grey">Layanan</a>
-            <a href="{{ route('front.index') }}#How-It-Works" class="rounded-2xl px-4 py-3 font-semibold hover:bg-patungan-bg-grey">Cara Pesan</a>
-            <a href="{{ route('front.index') }}#Resources" class="rounded-2xl px-4 py-3 font-semibold hover:bg-patungan-bg-grey">Resource</a>
-            <a href="{{ route('front.check_booking') }}" class="btn-primary mt-2 sm:hidden">Pesanan Saya</a>
+    <div id="mobile-navigation" data-mobile-menu class="hidden nav-mobile">
+        <div class="stb-shell nav-mobile__links">
+            <a href="{{ route('front.index') }}#Products" class="nav-mobile-link"><span>01</span> Layanan</a>
+            <a href="{{ route('front.index') }}#How-It-Works" class="nav-mobile-link"><span>02</span> Cara Pesan</a>
+            <a href="{{ route('front.index') }}#Resources" class="nav-mobile-link"><span>03</span> Resource</a>
+            <a href="{{ route('front.check_booking') }}" class="nav-mobile-order">Pesanan Saya <span aria-hidden="true">↗</span></a>
         </div>
     </div>
 </nav>

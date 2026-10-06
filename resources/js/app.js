@@ -1,4 +1,5 @@
 import './bootstrap';
+import { initSplitDemo } from './split-demo';
 
 const THEME_STORAGE_KEY = 'stb-theme';
 const root = document.documentElement;
@@ -32,7 +33,7 @@ const applyTheme = (theme, animate = false) => {
     root.style.colorScheme = theme;
 
     if (themeColor) {
-        themeColor.setAttribute('content', isDark ? '#110b18' : '#f5f3f6');
+        themeColor.setAttribute('content', isDark ? '#181719' : '#f4f0e7');
     }
 
     themeToggles.forEach((toggle) => {
@@ -117,6 +118,8 @@ if (menuButton && mobileMenu) {
         }
     });
 }
+
+initSplitDemo();
 
 // The landing-page animation bundle is optional and never blocks checkout pages.
 if (document.querySelector('[data-interactive-hero]')) {

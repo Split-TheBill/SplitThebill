@@ -26,7 +26,7 @@
             );
         @endphp
 
-        <main id="main-content" class="site-shell py-8 sm:py-10 lg:py-14">
+        <main id="main-content" class="transaction-page site-shell py-8 sm:py-10 lg:py-14">
             <header class="reveal-on-scroll mb-8 space-y-4 sm:mb-10">
                 <nav aria-label="Breadcrumb">
                     <ol class="flex flex-wrap items-center gap-2 text-sm font-semibold text-patungan-grey sm:text-base">
@@ -232,16 +232,15 @@
                     </section>
                 </div>
 
-                <aside class="motion-card reveal-on-scroll reveal-delay-2 overflow-hidden rounded-[32px] xl:sticky xl:top-28" aria-labelledby="member-status-title">
-                    <div class="relative bg-[linear-gradient(113.19deg,#092267_0%,#06061C_100%)] px-5 pb-14 pt-7 text-center">
-                        <img src="{{ asset('assets/images/backgrounds/header-lines-bg-small.svg') }}" class="motion-glow absolute inset-0 h-full w-full object-cover" alt="" aria-hidden="true">
+                <aside class="transaction-order-card overflow-hidden xl:sticky xl:top-28" aria-labelledby="member-status-title">
+                    <div class="transaction-reference px-5 py-7">
                         <div class="relative">
-                            <p class="font-semibold text-[#E2B9BB]">Kode booking</p>
-                            <p class="mt-1 break-all text-2xl font-extrabold text-white sm:text-[32px]">{{ $bookingDetails->booking_trx_id }}</p>
+                            <p class="transaction-reference__label font-semibold">Kode booking</p>
+                            <p class="transaction-reference__value mt-2 break-all text-2xl font-extrabold sm:text-[32px]">{{ $bookingDetails->booking_trx_id }}</p>
                         </div>
                     </div>
 
-                    <div class="relative -mt-8 rounded-[32px] bg-white p-5 sm:p-8">
+                    <div class="bg-white p-5 sm:p-8">
                         <h2 id="member-status-title" class="text-xl font-bold">Anggota Grup {{ $totalParticipants }}/{{ $bookingDetails->product->capacity }}</h2>
                         <hr class="my-5 border-patungan-border">
 
@@ -272,7 +271,7 @@
             </div>
         </main>
     @else
-        <main id="main-content" class="site-shell flex min-h-[70vh] flex-col items-center justify-center py-10 sm:py-14">
+        <main id="main-content" class="transaction-page site-shell flex min-h-[70vh] flex-col items-center justify-center py-10 sm:py-14">
             <header class="reveal-on-scroll text-center">
                 <nav aria-label="Breadcrumb">
                     <ol class="flex flex-wrap items-center justify-center gap-2 text-sm font-semibold text-patungan-grey sm:text-base">
@@ -284,17 +283,16 @@
                 <h1 class="section-title mt-4">Detail Pesanan Kamu</h1>
             </header>
 
-            <section class="motion-card reveal-on-scroll reveal-delay-1 mt-7 w-full max-w-3xl overflow-hidden rounded-[32px]" aria-labelledby="pending-status-title">
-                <div class="relative bg-[linear-gradient(113.19deg,#092267_0%,#06061C_100%)] px-5 pb-14 pt-7 text-center">
-                    <img src="{{ asset('assets/images/backgrounds/header-lines-bg.svg') }}" class="motion-glow absolute inset-0 h-full w-full object-cover" alt="" aria-hidden="true">
+            <section class="transaction-order-card mt-7 w-full max-w-3xl overflow-hidden" aria-labelledby="pending-status-title">
+                <div class="transaction-reference px-5 py-7">
                     <div class="relative">
-                        <p class="font-semibold text-[#E2B9BB]">Kode booking</p>
-                        <p class="mt-1 break-all text-2xl font-extrabold text-white sm:text-[32px]">{{ $bookingDetails->booking_trx_id }}</p>
+                        <p class="transaction-reference__label font-semibold">Kode booking</p>
+                        <p class="transaction-reference__value mt-2 break-all text-2xl font-extrabold sm:text-[32px]">{{ $bookingDetails->booking_trx_id }}</p>
                     </div>
                 </div>
-                <div class="relative -mt-8 rounded-[32px] bg-white p-5 text-center sm:p-10 lg:p-12">
-                    <div class="mx-auto flex w-fit items-center gap-2 rounded-full bg-patungan-yellow px-4 py-3 text-[#170C36]">
-                        <img src="{{ asset('assets/images/icons/clock-white.svg') }}" class="motion-float h-5 w-5" alt="" aria-hidden="true">
+                <div class="bg-white p-5 sm:p-10 lg:p-12">
+                    <div class="transaction-pending-status flex w-fit items-center gap-2 px-4 py-3">
+                        <img src="{{ asset('assets/images/icons/clock-red.svg') }}" class="h-5 w-5" alt="" aria-hidden="true">
                         <span class="font-bold">Menunggu Verifikasi</span>
                     </div>
                     <h2 id="pending-status-title" class="mx-auto mt-7 max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">Pesananmu sedang kami verifikasi</h2>

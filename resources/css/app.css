@@ -1,3 +1,6 @@
+@import "./landing.css";
+@import "./transaction.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,54 +14,54 @@
 @layer base {
     :root {
         color-scheme: light;
-        --brand-ink: #170c36;
-        --brand-muted: #5f667f;
-        --brand-surface: #f5f3f6;
-        --brand-card: #ffffff;
-        --brand-subtle: #f0eef1;
-        --brand-border: #dcdfe6;
-        --brand-accent: #c70060;
-        --brand-danger: #c70060;
+        --brand-ink: #28222d;
+        --brand-muted: #706970;
+        --brand-surface: #f4f0e7;
+        --brand-card: #fffcf6;
+        --brand-subtle: #ebe6dc;
+        --brand-border: #d3cec5;
+        --brand-accent: #bf3923;
+        --brand-danger: #c33c27;
         --brand-danger-surface: #fef2f2;
         --brand-danger-border: #fecaca;
         --brand-danger-text: #991b1b;
         --brand-warning-surface: #fffbeb;
         --brand-warning-border: #fcd34d;
         --brand-warning-text: #78350f;
-        --brand-deep: #170c36;
-        --brand-primary: #170c36;
-        --brand-primary-hover: #2b195a;
+        --brand-deep: #28222d;
+        --brand-primary: #28222d;
+        --brand-primary-hover: #493849;
         --brand-primary-contrast: #ffffff;
-        --brand-nav: rgba(255, 255, 255, 0.9);
-        --brand-soft-55: rgba(255, 255, 255, 0.55);
-        --brand-soft-60: rgba(255, 255, 255, 0.6);
+        --brand-nav: rgba(244, 240, 231, 0.96);
+        --brand-soft-55: rgba(255, 252, 246, 0.55);
+        --brand-soft-60: rgba(255, 252, 246, 0.6);
         --brand-shadow: rgba(23, 12, 54, 0.06);
         --brand-shadow-strong: rgba(23, 12, 54, 0.18);
     }
 
     :root[data-theme="dark"] {
         color-scheme: dark;
-        --brand-ink: #f8f3fb;
-        --brand-muted: #c1b7ca;
-        --brand-surface: #110b18;
-        --brand-card: #1d1426;
-        --brand-subtle: #281d31;
-        --brand-border: #44354f;
-        --brand-accent: #ff67af;
-        --brand-danger: #ff79b9;
+        --brand-ink: #f4efe6;
+        --brand-muted: #bdb5bb;
+        --brand-surface: #181719;
+        --brand-card: #242126;
+        --brand-subtle: #2d282f;
+        --brand-border: #484149;
+        --brand-accent: #ff7758;
+        --brand-danger: #ff8d76;
         --brand-danger-surface: rgba(127, 29, 29, 0.28);
         --brand-danger-border: #7f3b46;
         --brand-danger-text: #fca5a5;
         --brand-warning-surface: rgba(120, 53, 15, 0.3);
         --brand-warning-border: #a16207;
         --brand-warning-text: #fde68a;
-        --brand-deep: #21142d;
-        --brand-primary: #c80b68;
-        --brand-primary-hover: #df197b;
-        --brand-primary-contrast: #ffffff;
-        --brand-nav: rgba(17, 11, 24, 0.88);
-        --brand-soft-55: rgba(29, 20, 38, 0.72);
-        --brand-soft-60: rgba(29, 20, 38, 0.78);
+        --brand-deep: #28222d;
+        --brand-primary: #f4efe6;
+        --brand-primary-hover: #e3d5c4;
+        --brand-primary-contrast: #28222d;
+        --brand-nav: rgba(24, 23, 25, 0.96);
+        --brand-soft-55: rgba(36, 33, 38, 0.72);
+        --brand-soft-60: rgba(36, 33, 38, 0.78);
         --brand-shadow: rgba(0, 0, 0, 0.24);
         --brand-shadow-strong: rgba(0, 0, 0, 0.35);
     }
@@ -66,27 +69,27 @@
     @media (prefers-color-scheme: dark) {
         :root:not([data-theme]) {
             color-scheme: dark;
-            --brand-ink: #f8f3fb;
-            --brand-muted: #c1b7ca;
-            --brand-surface: #110b18;
-            --brand-card: #1d1426;
-            --brand-subtle: #281d31;
-            --brand-border: #44354f;
-            --brand-accent: #ff67af;
-            --brand-danger: #ff79b9;
+            --brand-ink: #f4efe6;
+            --brand-muted: #bdb5bb;
+            --brand-surface: #181719;
+            --brand-card: #242126;
+            --brand-subtle: #2d282f;
+            --brand-border: #484149;
+            --brand-accent: #ff7758;
+            --brand-danger: #ff8d76;
             --brand-danger-surface: rgba(127, 29, 29, 0.28);
             --brand-danger-border: #7f3b46;
             --brand-danger-text: #fca5a5;
             --brand-warning-surface: rgba(120, 53, 15, 0.3);
             --brand-warning-border: #a16207;
             --brand-warning-text: #fde68a;
-            --brand-deep: #21142d;
-            --brand-primary: #c80b68;
-            --brand-primary-hover: #df197b;
-            --brand-primary-contrast: #ffffff;
-            --brand-nav: rgba(17, 11, 24, 0.88);
-            --brand-soft-55: rgba(29, 20, 38, 0.72);
-            --brand-soft-60: rgba(29, 20, 38, 0.78);
+            --brand-deep: #28222d;
+            --brand-primary: #f4efe6;
+            --brand-primary-hover: #e3d5c4;
+            --brand-primary-contrast: #28222d;
+            --brand-nav: rgba(24, 23, 25, 0.96);
+            --brand-soft-55: rgba(36, 33, 38, 0.72);
+            --brand-soft-60: rgba(36, 33, 38, 0.78);
             --brand-shadow: rgba(0, 0, 0, 0.24);
             --brand-shadow-strong: rgba(0, 0, 0, 0.35);
         }
@@ -116,7 +119,7 @@
     }
 
     :focus-visible {
-        outline: 3px solid rgba(255, 12, 129, 0.45);
+        outline: 3px solid var(--brand-accent);
     }
 
     img {
@@ -124,7 +127,7 @@
     }
 
     ::selection {
-        background: rgba(255, 12, 129, 0.25);
+        background: rgba(232, 78, 49, 0.22);
         color: var(--brand-ink);
     }
 }
@@ -150,21 +153,20 @@
     }
 
     .surface-card {
-        @apply rounded-3xl;
+        @apply rounded-xl;
         background: var(--brand-card);
-        box-shadow: 0 18px 55px var(--brand-shadow);
+        border: 1px solid var(--brand-border);
         transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
     }
 
     .btn-primary,
     .btn-secondary {
-        @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-center font-bold transition duration-200 sm:min-h-14 sm:px-8;
+        @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 py-3 text-center font-bold transition duration-200 sm:min-h-14 sm:px-8;
     }
 
     .btn-primary {
         background: var(--brand-primary);
         color: var(--brand-primary-contrast);
-        box-shadow: 0 12px 30px var(--brand-shadow-strong);
     }
 
     .btn-primary:hover {
@@ -184,7 +186,7 @@
     }
 
     .form-control {
-        @apply w-full rounded-2xl border px-4 py-3 text-base font-semibold transition sm:px-5 sm:py-4;
+        @apply w-full rounded-lg border px-4 py-3 text-base font-semibold transition sm:px-5 sm:py-4;
         background: var(--brand-card);
         color: var(--brand-ink);
         border-color: var(--brand-border);
@@ -193,7 +195,7 @@
     .form-control:focus {
         border-color: var(--brand-accent);
         outline: none;
-        box-shadow: 0 0 0 4px rgba(255, 12, 129, 0.1);
+        box-shadow: 0 0 0 4px rgba(232, 78, 49, 0.1);
     }
 
     .skip-link {
@@ -342,18 +344,15 @@ div.group:has(input[type="radio"]:checked),
     justify-content: center;
     overflow: hidden;
     border: 1px solid var(--brand-border);
-    border-radius: 9999px;
+    border-radius: 4px;
     background: var(--brand-card);
     color: var(--brand-ink);
-    box-shadow: 0 8px 24px var(--brand-shadow);
     transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 }
 
 .theme-toggle:hover {
     border-color: var(--brand-accent);
     color: var(--brand-accent);
-    transform: translateY(-2px) rotate(5deg);
-    box-shadow: 0 12px 28px var(--brand-shadow-strong);
 }
 
 .theme-toggle:active {
@@ -437,105 +436,16 @@ body:has([data-navbar-theme-toggle]) .theme-toggle--floating {
 }
 
 .motion-card {
-    transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
-}
-
-@media (hover: hover) {
-    article.surface-card:hover,
-    figure.surface-card:hover,
-    details.surface-card:hover,
-    .motion-card:is(a, article, aside, figure, details, div, li):hover {
-        box-shadow: 0 24px 65px var(--brand-shadow-strong);
-        transform: translateY(-4px);
-    }
-
-}
-
-.motion-float {
-    animation: stb-float 4.5s ease-in-out infinite;
-}
-
-.motion-glow:is(a, button) {
-    animation: stb-action-glow 4.8s ease-in-out infinite;
-}
-
-.motion-glow:is(img, div) {
-    transform-origin: center;
-    animation: stb-ambient-glow 7s ease-in-out infinite;
-}
-
-.product-card__image {
-    transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.faq-item {
-    border: 1px solid transparent;
-}
-
-.faq-item[open] {
-    border-color: var(--brand-border);
-    box-shadow: 0 20px 50px var(--brand-shadow);
-}
-
-.faq-item[open] > p {
-    animation: stb-faq-open 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.faq-item[open] > summary > span:last-child {
-    color: var(--brand-accent);
+    transition: border-color 220ms ease;
 }
 
 .mobile-navigation-enter {
     animation: stb-menu-enter 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@media (hover: hover) and (pointer: fine) {
-    .product-card:hover .product-card__image {
-        transform: scale(1.055);
-    }
-
-}
-
-@keyframes stb-faq-open {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes stb-menu-enter {
     from { opacity: 0; transform: translateY(-8px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes stb-float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-7px);
-    }
-}
-
-@keyframes stb-action-glow {
-    0%, 100% {
-        box-shadow: 0 12px 30px var(--brand-shadow-strong);
-    }
-
-    50% {
-        box-shadow: 0 16px 38px rgba(255, 12, 129, 0.28);
-    }
-}
-
-@keyframes stb-ambient-glow {
-    0%, 100% {
-        opacity: 0.9;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.018);
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {

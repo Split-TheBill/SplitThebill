@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Split TheBill membantu kamu berbagi biaya langganan premium secara lebih hemat, mudah, dan transparan.">
-    <meta name="theme-color" content="#f5f3f6" data-theme-color>
+    <meta name="theme-color" content="#f4f0e7" data-theme-color>
     <title>@yield('title', 'Split TheBill')</title>
     <script>
         (() => {
@@ -23,7 +23,7 @@
             document.documentElement.dataset.theme = theme;
             document.documentElement.classList.toggle('dark', theme === 'dark');
             document.documentElement.style.colorScheme = theme;
-            document.querySelector('[data-theme-color]')?.setAttribute('content', theme === 'dark' ? '#110b18' : '#f5f3f6');
+            document.querySelector('[data-theme-color]')?.setAttribute('content', theme === 'dark' ? '#181719' : '#f4f0e7');
         })();
     </script>
     @stack('before-styles')

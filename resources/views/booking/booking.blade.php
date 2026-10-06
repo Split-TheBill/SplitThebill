@@ -5,7 +5,7 @@
 @section('content')
     <x-navbar />
 
-    <main id="main-content" class="site-shell py-8 sm:py-10 lg:py-14">
+    <main id="main-content" class="transaction-page site-shell py-8 sm:py-10 lg:py-14">
         <header class="reveal-on-scroll mb-8 space-y-4 sm:mb-10">
             <nav aria-label="Breadcrumb">
                 <ol class="flex flex-wrap items-center gap-2 text-sm font-semibold text-patungan-grey sm:text-base">
@@ -31,11 +31,6 @@
                         </div>
                         <div class="min-w-0">
                             <h2 id="selected-product-title" class="break-words text-xl font-bold">{{ $product->name }}</h2>
-                            <div class="mt-1 flex items-center gap-1" aria-label="Rating 4,9 dari 5">
-                                <img src="{{ asset('assets/images/icons/Star.svg') }}" class="h-5 w-5" alt="" aria-hidden="true">
-                                <span class="font-bold">4,9</span>
-                                <span class="text-sm font-semibold text-patungan-grey">(2.120 ulasan)</span>
-                            </div>
                         </div>
                     </div>
                     <div class="rounded-2xl border border-patungan-border p-4">
@@ -53,7 +48,7 @@
             <form method="POST" action="{{ route('front.booking_store', $product->slug) }}" class="surface-card motion-card reveal-on-scroll reveal-delay-1 min-w-0 overflow-hidden lg:col-span-2">
                 @csrf
 
-                <div class="bg-[#007B9D] px-5 py-5 text-center text-sm font-bold leading-6 text-white sm:px-8 sm:text-base">
+                <div class="transaction-notice px-5 py-5 text-sm font-bold leading-6 sm:px-8 sm:text-base">
                     Masukkan data dengan benar. Bukti pesanan akan kami kirim ke email kamu.
                 </div>
 
