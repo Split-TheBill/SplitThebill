@@ -5,150 +5,65 @@
 @section('content')
     @php
         $steps = [
-            [
-                'number' => '01',
-                'title' => 'Pilih layanan',
-                'description' => 'Temukan layanan premium yang ingin kamu nikmati bersama dengan harga yang lebih ringan.',
-                'image' => 'assets/images/thumbnails/select-product.png',
-            ],
-            [
-                'number' => '02',
-                'title' => 'Lengkapi pembayaran',
-                'description' => 'Isi data dengan benar, transfer sesuai total pesanan, lalu unggah bukti pembayaran.',
-                'image' => 'assets/images/thumbnails/payment-process.png',
-            ],
-            [
-                'number' => '03',
-                'title' => 'Bergabung ke grup',
-                'description' => 'Setelah pembayaran diverifikasi, kamu akan masuk ke grup dan menerima informasi akses.',
-                'image' => 'assets/images/thumbnails/join-group.png',
-            ],
-        ];
-
-        $testimonials = [
-            ['name' => 'Nabila Reyna', 'photo' => 'photo-1.png', 'text' => 'Prosesnya jelas dan cepat. Langganan jadi jauh lebih hemat tanpa perlu bingung mengatur grup sendiri.'],
-            ['name' => 'Bapak Budi', 'photo' => 'photo-2.png', 'text' => 'Status pesanan mudah dicek dan semua informasi pembayaran tersusun rapi. Pengalaman yang sangat praktis.'],
-            ['name' => 'Ibu Budi', 'photo' => 'photo-3.png', 'text' => 'Pilihan layanannya lengkap dan alur pesan mudah diikuti, bahkan dari ponsel. Sangat membantu untuk berhemat.'],
-            ['name' => 'Murayiki Bazz', 'photo' => 'photo-4.png', 'text' => 'Tidak perlu lagi membayar harga penuh. Informasi grup dan progres pesanan juga transparan.'],
-            ['name' => 'Bimore Atreidess', 'photo' => 'photo-5.png', 'text' => 'Mulai dari memilih produk sampai mengunggah bukti transfer terasa sederhana dan tidak berbelit-belit.'],
-            ['name' => 'Unil Utami', 'photo' => 'photo-6.png', 'text' => 'Harga lebih ramah di kantong dan layanan pelanggan responsif saat saya membutuhkan bantuan.'],
+            ['title' => 'Pilih layanan', 'description' => 'Bandingkan pilihan, harga per orang, dan durasinya.'],
+            ['title' => 'Buat pesanan', 'description' => 'Isi data, transfer sesuai rincian, lalu unggah bukti pembayaran.'],
+            ['title' => 'Pantau status', 'description' => 'Gunakan kode booking dan nomor WhatsApp untuk melihat progres pesanan.'],
         ];
 
         $faqs = [
-            ['question' => 'Kapan langganan mulai aktif?', 'answer' => 'Langganan diproses setelah bukti pembayaran berhasil diverifikasi. Kamu dapat memantau statusnya kapan saja melalui menu Pesanan Saya.'],
-            ['question' => 'Bagaimana cara memperpanjang langganan?', 'answer' => 'Pilih kembali layanan yang sama dan lakukan pemesanan baru sebelum masa langganan aktif berakhir agar akses tetap berlanjut.'],
-            ['question' => 'Metode pembayaran apa yang tersedia?', 'answer' => 'Saat ini pembayaran dilakukan melalui transfer bank yang tersedia pada halaman pembayaran. Simpan bukti transfer untuk proses verifikasi.'],
-            ['question' => 'Bagaimana jika akun langganan bermasalah?', 'answer' => 'Periksa pesan terbaru pada detail pesanan terlebih dahulu. Jika masalah berlanjut, hubungi tim dukungan dengan menyertakan kode booking.'],
-            ['question' => 'Apakah data pribadi saya aman?', 'answer' => 'Kami hanya meminta data yang diperlukan untuk memproses pesanan. Jangan pernah membagikan kode booking kepada pihak yang tidak berkepentingan.'],
-            ['question' => 'Bagaimana jika grup belum penuh?', 'answer' => 'Status dan jumlah anggota dapat dipantau melalui detail pesanan. Informasi lanjutan akan diberikan melalui pesan pada grup pesananmu.'],
+            ['question' => 'Kapan langganan mulai aktif?', 'answer' => 'Langganan diproses setelah bukti pembayaran diverifikasi. Kamu dapat memantau statusnya melalui menu Pesanan Saya.'],
+            ['question' => 'Metode pembayaran apa yang tersedia?', 'answer' => 'Metode dan rekening tujuan yang tersedia tercantum di halaman pembayaran. Simpan bukti transfer untuk proses verifikasi.'],
+            ['question' => 'Bagaimana jika akses bermasalah?', 'answer' => 'Periksa pesan terbaru pada detail pesanan. Jika masalah berlanjut, hubungi tim dukungan dan sertakan kode booking.'],
+            ['question' => 'Bagaimana jika grup belum penuh?', 'answer' => 'Status dan jumlah anggota dapat dilihat pada detail pesanan. Informasi lanjutan akan disampaikan melalui pesan pada grup pesananmu.'],
         ];
     @endphp
 
     <x-navbar />
 
     <main id="main-content">
-        <header class="relative isolate overflow-hidden" data-interactive-hero>
-            <div class="hero-ambient absolute -z-10" data-hero-ambient aria-hidden="true"></div>
-            <div class="site-shell flex min-h-[620px] flex-col items-center justify-center py-16 text-center sm:min-h-[680px] sm:py-20 lg:min-h-[720px]">
-                <div class="reveal-on-scroll inline-flex max-w-full items-center gap-3 rounded-full bg-patungan-black px-4 py-2 text-left text-sm font-semibold text-white sm:px-5 sm:text-base">
-                    <img src="{{ asset('assets/images/photos/Profiles.png') }}" class="h-8 w-auto shrink-0 sm:h-9" alt="">
-                    <span><strong>16.500+</strong> pengguna sudah bergabung 🔥</span>
-                </div>
-
-                <h1 class="reveal-on-scroll reveal-delay-1 mt-8 max-w-5xl font-Grifter text-[clamp(2.6rem,8vw,5rem)] font-bold leading-[1.04] tracking-[-0.03em] sm:mt-10">
-                    Patungan akun premium,
-                    <span class="bg-gradient-to-r from-[#E25520] to-[#E45687] bg-clip-text text-transparent">hemat tanpa batas</span>
-                </h1>
-
-                <p class="reveal-on-scroll reveal-delay-2 mt-6 max-w-2xl text-base font-medium leading-7 text-patungan-grey sm:text-lg sm:leading-8">
-                    Nikmati layanan streaming, musik, dan edukasi bersama. Alur pemesanan transparan, biaya lebih ringan, dan status mudah dipantau.
-                </p>
-
-                <div class="reveal-on-scroll reveal-delay-3 mt-9 flex w-full max-w-lg flex-col justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4">
-                    <a href="#Products" class="btn-primary">
-                        Lihat Layanan
-                        <img src="{{ asset('assets/images/icons/arrow-right-white.svg') }}" class="cta-arrow h-5 w-5" alt="">
-                    </a>
-                    <a href="#How-It-Works" class="btn-secondary">Pelajari Cara Pesan</a>
-                </div>
+        <header class="site-shell flex min-h-[480px] flex-col justify-center py-20 sm:min-h-[560px] sm:py-24" data-interactive-hero>
+            <p class="reveal-on-scroll section-kicker">Split TheBill</p>
+            <h1 class="reveal-on-scroll reveal-delay-1 mt-5 max-w-4xl font-Grifter text-[clamp(2.75rem,7vw,5.25rem)] font-bold leading-[1.06] tracking-[-0.04em]">
+                Langganan premium,<br>
+                <span class="text-patungan-red">lebih ringan bersama.</span>
+            </h1>
+            <p class="reveal-on-scroll reveal-delay-2 mt-6 max-w-2xl text-base font-medium leading-7 text-patungan-grey sm:text-lg sm:leading-8">
+                Pilih layanan, lihat rincian biaya, dan pantau pesananmu dalam satu tempat.
+            </p>
+            <div class="reveal-on-scroll reveal-delay-3 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href="#Products" class="btn-primary w-full sm:w-auto">Jelajahi layanan</a>
+                <a href="{{ route('front.check_booking') }}" class="btn-secondary w-full sm:w-auto">Cek pesanan</a>
             </div>
-            <a href="#Products" class="hero-scroll-cue" aria-label="Gulir ke bagian layanan">
-                <span class="hero-scroll-cue__line" aria-hidden="true"></span>
-                Jelajahi halaman
-            </a>
         </header>
 
-        <section aria-label="Statistik Split TheBill" class="reveal-on-scroll bg-patungan-black text-white">
-            <div class="site-shell grid grid-cols-2 gap-px bg-white/10 py-1 sm:grid-cols-4">
-                @foreach ([[2209, '+', 'Total pengguna'], [9, '/10', 'Pelanggan puas'], [12, '', 'Layanan'], [4920, '+', 'Transaksi']] as [$count, $suffix, $label])
-                    <div class="flex flex-col items-center bg-patungan-black px-3 py-8 text-center sm:py-10">
-                        <strong class="font-Grifter text-3xl sm:text-4xl">
-                            <span aria-hidden="true" data-count-to="{{ $count }}" data-count-suffix="{{ $suffix }}">{{ number_format($count, 0, ',', '.') }}{{ $suffix }}</span>
-                            <span class="sr-only">{{ number_format($count, 0, ',', '.') }}{{ $suffix }}</span>
-                        </strong>
-                        <span class="mt-2 text-sm font-semibold text-patungan-violet sm:text-base">{{ $label }}</span>
-                    </div>
-                @endforeach
-            </div>
-        </section>
-
-        <section id="Products" class="section-space relative overflow-hidden">
-            <div class="absolute -right-40 top-0 -z-10 h-80 w-80 rounded-full bg-pink-200/30 blur-3xl"></div>
+        <section id="Products" class="section-space border-t border-patungan-border">
             <div class="site-shell">
-                <div class="reveal-on-scroll flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-                    <div class="max-w-2xl">
-                        <p class="section-kicker">Layanan kami</p>
-                        <h2 class="section-title mt-3">Beragam akun premium untuk dinikmati bersama</h2>
-                    </div>
-                    <a href="{{ route('front.check_booking') }}" class="font-bold text-patungan-grey transition hover:text-patungan-black">Sudah memesan? Cek status →</a>
+                <div class="reveal-on-scroll max-w-2xl">
+                    <p class="section-kicker">Layanan</p>
+                    <h2 class="section-title mt-3">Pilih yang sesuai untukmu</h2>
+                    <p class="mt-4 leading-7 text-patungan-grey">Lihat harga dan informasi setiap layanan sebelum memesan.</p>
                 </div>
 
                 @if ($newProducts->isEmpty())
-                    <div class="surface-card empty-products-card reveal-on-scroll reveal-delay-1 mt-10 overflow-hidden">
-                        <div class="relative z-10 max-w-xl p-7 sm:p-10 lg:p-12">
-                            <p class="section-kicker">Segera hadir</p>
-                            <h3 class="section-title mt-3">Layanan baru sedang kami siapkan</h3>
-                            <p class="mt-4 max-w-lg leading-7 text-patungan-grey">Kami sedang menyiapkan pilihan langganan berikutnya. Ikuti kabar terbaru agar kamu tahu saat layanan tersedia.</p>
-                            <a href="https://www.instagram.com/split.thebill" target="_blank" rel="noopener noreferrer" class="btn-secondary mt-7 w-full sm:w-auto">
-                                Ikuti kabar terbaru <span aria-hidden="true">↗</span>
-                            </a>
-                        </div>
-                        <div class="empty-products-art" aria-hidden="true">
-                            <div class="empty-products-art__ring">
-                                <div class="empty-products-art__icon">
-                                    <img src="{{ asset('assets/images/icons/receipt-text-orange.svg') }}" class="h-12 w-12" alt="">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="surface-card reveal-on-scroll mt-10 max-w-3xl p-7 sm:p-10">
+                        <p class="section-kicker">Segera hadir</p>
+                        <h3 class="mt-3 text-2xl font-bold">Layanan sedang kami siapkan</h3>
+                        <p class="mt-3 leading-7 text-patungan-grey">Pilihan layanan belum tersedia saat ini. Ikuti kabar terbaru untuk mengetahui saat layanan kembali dibuka.</p>
+                        <a href="https://www.instagram.com/split.thebill" target="_blank" rel="noopener noreferrer" class="btn-secondary mt-7 w-full sm:w-auto">Lihat kabar terbaru <span aria-hidden="true">↗</span></a>
                     </div>
                 @else
-                    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                         @foreach ($newProducts->take(6) as $product)
                             <article class="surface-card motion-card product-card reveal-on-scroll flex min-w-0 flex-col overflow-hidden">
-                                <a href="{{ route('front.details', $product) }}" class="block aspect-[16/9] overflow-hidden bg-[#D9D9D9]">
-                                    <img src="{{ $product->thumbnail_url }}" class="product-card__image h-full w-full object-cover" alt="{{ $product->name }}">
+                                <a href="{{ route('front.details', $product) }}" class="block aspect-[16/9] overflow-hidden bg-patungan-bg-grey" aria-label="Lihat detail {{ $product->name }}">
+                                    <img src="{{ $product->thumbnail_url }}" class="product-card__image h-full w-full object-cover" alt="" loading="lazy">
                                 </a>
                                 <div class="flex flex-1 flex-col p-5 sm:p-6">
-                                    <div class="flex min-w-0 items-center gap-3">
-                                        <div class="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-patungan-bg-grey">
-                                            <img src="{{ $product->photo_url }}" class="h-full w-full object-contain" alt="">
-                                        </div>
-                                        <div class="min-w-0">
-                                            <h3 class="truncate text-xl font-bold">{{ $product->name }}</h3>
-                                            <p class="mt-1 text-sm font-semibold text-patungan-grey">{{ $product->duration }} · {{ $product->capacity }} orang</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="my-6 rounded-2xl border border-patungan-border bg-patungan-bg-grey p-4">
-                                        <p class="text-sm font-semibold text-patungan-grey">Mulai dari</p>
-                                        <p class="mt-1 text-2xl font-extrabold">Rp {{ number_format($product->price_per_person, 0, ',', '.') }}</p>
-                                        <p class="mt-2 flex items-center gap-2 text-sm font-semibold text-patungan-grey">
-                                            <img src="{{ asset('assets/images/icons/verify-green.svg') }}" class="h-4 w-4" alt="">
-                                            Harga per orang
-                                        </p>
-                                    </div>
-
-                                    <a href="{{ route('front.details', $product) }}" class="btn-primary mt-auto w-full">Lihat Detail</a>
+                                    <h3 class="text-xl font-bold">{{ $product->name }}</h3>
+                                    <p class="mt-2 text-sm font-medium text-patungan-grey">{{ $product->duration }} · {{ $product->capacity }} orang</p>
+                                    <p class="mt-6 text-sm font-semibold text-patungan-grey">Harga per orang</p>
+                                    <p class="mt-1 text-2xl font-extrabold">Rp {{ number_format($product->price_per_person, 0, ',', '.') }}</p>
+                                    <a href="{{ route('front.details', $product) }}" class="btn-primary mt-6 w-full">Lihat detail</a>
                                 </div>
                             </article>
                         @endforeach
@@ -158,154 +73,73 @@
         </section>
 
         <section id="How-It-Works" class="section-space bg-white/55">
-            <div class="site-shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-                <div class="reveal-on-scroll lg:sticky lg:top-28 lg:self-start">
-                    <p class="section-kicker">Cara pesan</p>
-                    <h2 class="section-title mt-3">Mudah dari awal sampai akses diterima</h2>
-                    <p class="mt-5 max-w-xl text-base font-medium leading-7 text-patungan-grey sm:text-lg sm:leading-8">
-                        Setiap tahap dirancang agar informasi harga, pembayaran, dan status grup mudah dipahami.
-                    </p>
-
-                    <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                        @foreach (['Data pribadi aman', 'Pembayaran transparan', 'Akun resmi & legal', 'Status mudah dipantau', 'Lebih hemat', 'Dukungan pelanggan'] as $benefit)
-                            <p class="flex items-center gap-2 font-semibold text-patungan-grey">
-                                <img src="{{ asset('assets/images/icons/verify-green.svg') }}" class="h-5 w-5 shrink-0" alt="">
-                                {{ $benefit }}
-                            </p>
-                        @endforeach
-                    </div>
-
-                    <a href="#Products" class="btn-primary mt-8 w-full sm:w-auto">Mulai Pilih Layanan</a>
-                </div>
-
-                <div class="steps-timeline relative grid gap-6" data-steps-track>
-                    <div class="steps-timeline__rail" aria-hidden="true">
-                        <span class="steps-timeline__progress" data-steps-progress></span>
-                    </div>
-                    @foreach ($steps as $step)
-                        <article class="surface-card motion-card step-card reveal-on-scroll grid overflow-hidden sm:grid-cols-[1fr_220px]">
-                            <div class="p-6 sm:p-8">
-                                <span class="step-card__number inline-flex h-12 min-w-12 items-center justify-center rounded-full bg-patungan-black px-3 font-Grifter text-lg text-white">{{ $step['number'] }}</span>
-                                <h3 class="mt-5 text-2xl font-bold">{{ $step['title'] }}</h3>
-                                <p class="mt-3 leading-7 text-patungan-grey">{{ $step['description'] }}</p>
-                            </div>
-                            <div class="h-52 overflow-hidden bg-patungan-bg-grey sm:h-full sm:min-h-64">
-                                <img src="{{ asset($step['image']) }}" class="step-card__image h-full w-full object-contain p-4 sm:p-5" alt="Ilustrasi {{ strtolower($step['title']) }}">
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-
-        <section id="Payment-Method" class="section-space">
-            <div class="site-shell reveal-on-scroll text-center">
-                <p class="section-kicker">Metode pembayaran</p>
-                <h2 class="section-title mt-3">Transfer dari bank dan dompet digital favoritmu</h2>
-                <div class="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-semibold text-patungan-grey sm:text-base">
-                    @foreach (['Transfer bank', 'Virtual account', 'Dompet digital'] as $method)
-                        <span class="flex items-center gap-2">
-                            <img src="{{ asset('assets/images/icons/verify-green.svg') }}" class="h-5 w-5" alt="">
-                            {{ $method }}
-                        </span>
-                    @endforeach
-                </div>
-                <div class="surface-card media-well motion-card reveal-on-scroll reveal-delay-1 mx-auto mt-9 max-w-5xl overflow-x-auto p-4 sm:p-8" role="region" aria-label="Metode pembayaran, geser untuk melihat gambar selengkapnya" tabindex="0">
-                    <img src="{{ asset('assets/images/thumbnails/supported-payments.png') }}" class="mx-auto h-auto w-[640px] max-w-none object-contain sm:w-full sm:max-w-full" alt="Bank dan metode pembayaran yang didukung">
-                </div>
-                <p class="mt-3 text-sm font-semibold text-patungan-grey sm:hidden">Geser gambar untuk melihat semua metode pembayaran →</p>
-            </div>
-        </section>
-
-        <section id="Happy-Customer" class="section-space bg-white/55">
             <div class="site-shell">
-                <div class="reveal-on-scroll mx-auto max-w-3xl text-center">
-                    <p class="section-kicker">Cerita pelanggan</p>
-                    <h2 class="section-title mt-3">Pengalaman hemat yang terasa lebih sederhana</h2>
+                <div class="reveal-on-scroll max-w-2xl">
+                    <p class="section-kicker">Cara pesan</p>
+                    <h2 class="section-title mt-3">Tiga langkah sederhana</h2>
                 </div>
-
-                <div class="testimonials-track reveal-on-scroll reveal-delay-1 mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="region" aria-label="Cerita pelanggan, geser untuk melihat testimoni lainnya" tabindex="0">
-                    @foreach ($testimonials as $testimonial)
-                        <figure class="surface-card motion-card testimonial-card flex h-full flex-col p-6 sm:p-7">
-                            <div class="flex items-center gap-3">
-                                <img src="{{ asset('assets/images/photos/' . $testimonial['photo']) }}" class="h-12 w-12 rounded-full object-cover" alt="Foto {{ $testimonial['name'] }}">
-                                <figcaption>
-                                    <p class="font-bold">{{ $testimonial['name'] }}</p>
-                                    <p class="text-sm font-semibold text-patungan-grey">Pelanggan Split TheBill</p>
-                                </figcaption>
-                            </div>
-                            <blockquote class="mt-6 flex-1 leading-7">“{{ $testimonial['text'] }}”</blockquote>
-                            <div class="mt-6 flex" aria-label="5 dari 5 bintang">
-                                @for ($star = 0; $star < 5; $star++)
-                                    <img src="{{ asset('assets/images/icons/Star.svg') }}" class="h-5 w-5" alt="">
-                                @endfor
-                            </div>
-                        </figure>
+                <ol class="mt-10 grid gap-5 md:grid-cols-3">
+                    @foreach ($steps as $index => $step)
+                        <li class="surface-card motion-card step-card reveal-on-scroll p-6 sm:p-8">
+                            <span class="font-Grifter text-sm text-patungan-red">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                            <h3 class="mt-5 text-xl font-bold">{{ $step['title'] }}</h3>
+                            <p class="mt-3 leading-7 text-patungan-grey">{{ $step['description'] }}</p>
+                        </li>
                     @endforeach
-                </div>
+                </ol>
             </div>
         </section>
 
         <section id="FAQ" class="section-space">
-            <div class="site-shell">
-                <div class="reveal-on-scroll mx-auto max-w-3xl text-center">
+            <div class="site-shell grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+                <div class="reveal-on-scroll max-w-lg">
                     <p class="section-kicker">Pertanyaan umum</p>
-                    <h2 class="section-title mt-3">Jawaban singkat sebelum kamu mulai</h2>
+                    <h2 class="section-title mt-3">Yang perlu kamu tahu</h2>
+                    <p class="mt-4 leading-7 text-patungan-grey">Jawaban singkat tentang pembayaran dan status pesanan.</p>
                 </div>
-
-                <div class="reveal-on-scroll reveal-delay-1 mx-auto mt-10 grid max-w-5xl gap-4 lg:grid-cols-2">
+                <div class="grid gap-3">
                     @foreach ($faqs as $index => $faq)
-                        <details class="group surface-card motion-card faq-item overflow-hidden" @if ($index === 0) open @endif>
+                        <details class="group surface-card faq-item reveal-on-scroll overflow-hidden" @if ($index === 0) open @endif>
                             <summary class="flex cursor-pointer list-none items-start justify-between gap-4 p-5 font-bold sm:p-6">
-                                <span class="flex gap-3">
-                                    <span class="text-patungan-grey">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                                    <span>{{ $faq['question'] }}</span>
-                                </span>
-                                <span class="mt-0.5 text-xl transition group-open:rotate-45" aria-hidden="true">+</span>
+                                <span>{{ $faq['question'] }}</span>
+                                <span class="text-xl transition group-open:rotate-45" aria-hidden="true">+</span>
                             </summary>
-                            <p class="px-5 pb-5 pl-[3.75rem] leading-7 text-patungan-grey sm:px-6 sm:pb-6 sm:pl-[4.25rem]">{{ $faq['answer'] }}</p>
+                            <p class="px-5 pb-5 leading-7 text-patungan-grey sm:px-6 sm:pb-6">{{ $faq['answer'] }}</p>
                         </details>
                     @endforeach
                 </div>
             </div>
         </section>
+
+        <section id="Resources" class="section-space border-t border-patungan-border bg-white/55">
+            <div class="site-shell">
+                <div class="reveal-on-scroll max-w-2xl">
+                    <p class="section-kicker">Resource</p>
+                    <h2 class="section-title mt-3">Temukan informasi yang kamu butuhkan</h2>
+                </div>
+                <div class="mt-9 grid gap-3 sm:grid-cols-2">
+                    <a href="#How-It-Works" class="surface-card motion-card reveal-on-scroll flex items-center justify-between gap-4 p-5 font-bold sm:p-6">Panduan pemesanan <span aria-hidden="true">↗</span></a>
+                    <a href="#FAQ" class="surface-card motion-card reveal-on-scroll flex items-center justify-between gap-4 p-5 font-bold sm:p-6">Pertanyaan umum <span aria-hidden="true">↗</span></a>
+                    <a href="{{ route('front.check_booking') }}" class="surface-card motion-card reveal-on-scroll flex items-center justify-between gap-4 p-5 font-bold sm:p-6">Cek status pesanan <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.instagram.com/split.thebill" target="_blank" rel="noopener noreferrer" class="surface-card motion-card reveal-on-scroll flex items-center justify-between gap-4 p-5 font-bold sm:p-6">Kabar terbaru <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="border-t border-white bg-white/60 py-12 sm:py-14">
-        <div class="site-shell reveal-on-scroll">
-            <div class="grid gap-10 md:grid-cols-[1.25fr_0.75fr_0.75fr]">
-                <div class="max-w-md">
-                    <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="brand-logo--light h-10 w-auto" alt="Split TheBill">
-                    <img src="{{ asset('assets/images/logos/logos.svg') }}" class="brand-logo--dark h-10 w-auto" alt="Split TheBill">
-                    <p class="mt-5 leading-7 text-patungan-grey">Berbagi biaya langganan premium dengan alur yang lebih mudah, transparan, dan terjangkau.</p>
-                </div>
-
-                <div>
-                    <h2 class="font-bold">Jelajahi</h2>
-                    <ul class="mt-4 grid gap-3 text-patungan-grey">
-                        <li><a href="#Products" class="transition hover:text-patungan-black">Layanan</a></li>
-                        <li><a href="#How-It-Works" class="transition hover:text-patungan-black">Cara Pesan</a></li>
-                        <li><a href="#Happy-Customer" class="transition hover:text-patungan-black">Testimoni</a></li>
-                        <li><a href="#FAQ" class="transition hover:text-patungan-black">FAQ</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h2 class="font-bold">Pesanan</h2>
-                    <ul class="mt-4 grid gap-3 text-patungan-grey">
-                        <li><a href="{{ route('front.check_booking') }}" class="transition hover:text-patungan-black">Cek Pesanan</a></li>
-                        <li><a href="{{ url('/admin') }}" class="transition hover:text-patungan-black">Panel Admin</a></li>
-                    </ul>
-                </div>
+    <footer class="border-t border-patungan-border bg-white/60 py-9 sm:py-11">
+        <div class="site-shell flex flex-col gap-7 md:flex-row md:items-center md:justify-between">
+            <div>
+                <img src="{{ asset('assets/images/logos/logoo.svg') }}" class="brand-logo--light h-9 w-auto" alt="Split TheBill">
+                <img src="{{ asset('assets/images/logos/logos.svg') }}" class="brand-logo--dark h-9 w-auto" alt="Split TheBill">
+                <p class="mt-3 max-w-sm text-sm leading-6 text-patungan-grey">Berbagi biaya langganan premium dengan alur yang jelas.</p>
             </div>
-
-            <div class="mt-10 flex flex-col gap-5 border-t border-patungan-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-                <p class="text-sm font-medium text-patungan-grey">© {{ now()->year }} Split TheBill. Hak cipta dilindungi.</p>
-                <a href="https://www.instagram.com/split.thebill" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-patungan-grey transition hover:text-patungan-black">
-                    <img src="{{ asset('assets/images/icons/instagram.svg') }}" class="h-5 w-5" alt="">
-                    Instagram
-                </a>
+            <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-patungan-grey">
+                <a href="#Products" class="transition hover:text-patungan-black">Layanan</a>
+                <a href="#Resources" class="transition hover:text-patungan-black">Resource</a>
+                <a href="{{ route('front.check_booking') }}" class="transition hover:text-patungan-black">Cek pesanan</a>
             </div>
         </div>
+        <div class="site-shell mt-7 border-t border-patungan-border pt-5 text-sm text-patungan-grey">© {{ now()->year }} Split TheBill.</div>
     </footer>
 @endsection

@@ -7,11 +7,10 @@
             <img src="{{ asset('assets/images/logos/logos.svg') }}" class="brand-logo--dark h-9 w-auto sm:h-10" alt="Split TheBill">
         </a>
 
-        <ul class="hidden items-center gap-6 lg:flex">
+        <ul class="hidden items-center gap-7 lg:flex">
             <li><a href="{{ route('front.index') }}#Products" class="font-semibold text-patungan-grey transition hover:text-patungan-black">Layanan</a></li>
             <li><a href="{{ route('front.index') }}#How-It-Works" class="font-semibold text-patungan-grey transition hover:text-patungan-black">Cara Pesan</a></li>
-            <li><a href="{{ route('front.index') }}#Happy-Customer" class="font-semibold text-patungan-grey transition hover:text-patungan-black">Testimoni</a></li>
-            <li><a href="{{ route('front.index') }}#FAQ" class="font-semibold text-patungan-grey transition hover:text-patungan-black">FAQ</a></li>
+            <li><a href="{{ route('front.index') }}#Resources" class="font-semibold text-patungan-grey transition hover:text-patungan-black">Resource</a></li>
         </ul>
 
         <div class="flex items-center gap-2 sm:gap-3">
@@ -51,8 +50,7 @@
         <div class="site-shell flex flex-col gap-1 py-4">
             <a href="{{ route('front.index') }}#Products" class="rounded-2xl px-4 py-3 font-semibold hover:bg-patungan-bg-grey">Layanan</a>
             <a href="{{ route('front.index') }}#How-It-Works" class="rounded-2xl px-4 py-3 font-semibold hover:bg-patungan-bg-grey">Cara Pesan</a>
-            <a href="{{ route('front.index') }}#Happy-Customer" class="rounded-2xl px-4 py-3 font-semibold hover:bg-patungan-bg-grey">Testimoni</a>
-            <a href="{{ route('front.index') }}#FAQ" class="rounded-2xl px-4 py-3 font-semibold hover:bg-patungan-bg-grey">FAQ</a>
+            <a href="{{ route('front.index') }}#Resources" class="rounded-2xl px-4 py-3 font-semibold hover:bg-patungan-bg-grey">Resource</a>
             <a href="{{ route('front.check_booking') }}" class="btn-primary mt-2 sm:hidden">Pesanan Saya</a>
         </div>
     </div>

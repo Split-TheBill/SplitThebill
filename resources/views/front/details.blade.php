@@ -43,11 +43,6 @@
                             </div>
                             <div class="min-w-0">
                                 <h2 class="break-words text-xl font-bold leading-tight">{{ $product->name }}</h2>
-                                <div class="mt-1 flex flex-wrap items-center gap-1" aria-label="Rating 4,9 dari 5 berdasarkan 2.120 ulasan">
-                                    <img src="{{ asset('assets/images/icons/Star.svg') }}" class="h-5 w-5 shrink-0" alt="" aria-hidden="true">
-                                    <span class="font-bold">4,9</span>
-                                    <span class="font-semibold text-patungan-grey">(2.120 ulasan)</span>
-                                </div>
                             </div>
                         </div>
 
@@ -86,11 +81,6 @@
                             @endforelse
                         </section>
 
-                        <hr class="border-patungan-border">
-                        <div class="flex items-center gap-3">
-                            <img src="{{ asset('assets/images/photos/Profiles.png') }}" class="h-9 w-auto shrink-0" alt="" aria-hidden="true">
-                            <p class="font-semibold">5.219+ <span class="text-patungan-grey">pengguna telah bergabung</span></p>
-                        </div>
                     </div>
                 </article>
 
