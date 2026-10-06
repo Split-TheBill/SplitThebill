@@ -36,6 +36,7 @@
     @stack('after-styles')
 </head>
 <body class="overflow-x-hidden">
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
 
     @yield('content')
 

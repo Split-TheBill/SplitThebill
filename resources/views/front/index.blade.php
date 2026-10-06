@@ -51,7 +51,7 @@
             <div class="hero-ambient absolute -z-10" data-hero-ambient aria-hidden="true"></div>
             <div class="site-shell flex min-h-[620px] flex-col items-center justify-center py-16 text-center sm:min-h-[680px] sm:py-20 lg:min-h-[720px]">
                 <div class="reveal-on-scroll inline-flex max-w-full items-center gap-3 rounded-full bg-patungan-black px-4 py-2 text-left text-sm font-semibold text-white sm:px-5 sm:text-base">
-                    <img src="{{ asset('assets/images/photos/Profiles.png') }}" class="motion-float h-8 w-auto shrink-0 sm:h-9" alt="">
+                    <img src="{{ asset('assets/images/photos/Profiles.png') }}" class="h-8 w-auto shrink-0 sm:h-9" alt="">
                     <span><strong>16.500+</strong> pengguna sudah bergabung 🔥</span>
                 </div>
 
@@ -72,6 +72,10 @@
                     <a href="#How-It-Works" class="btn-secondary">Pelajari Cara Pesan</a>
                 </div>
             </div>
+            <a href="#Products" class="hero-scroll-cue" aria-label="Gulir ke bagian layanan">
+                <span class="hero-scroll-cue__line" aria-hidden="true"></span>
+                Jelajahi halaman
+            </a>
         </header>
 
         <section aria-label="Statistik Split TheBill" class="reveal-on-scroll bg-patungan-black text-white">
@@ -100,12 +104,22 @@
                 </div>
 
                 @if ($newProducts->isEmpty())
-                    <div class="surface-card motion-card reveal-on-scroll reveal-delay-1 mt-10 flex flex-col items-center px-6 py-14 text-center sm:px-10">
-                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-patungan-bg-grey">
-                            <img src="{{ asset('assets/images/icons/receipt-text-black.svg') }}" class="h-8 w-8" alt="">
+                    <div class="surface-card empty-products-card reveal-on-scroll reveal-delay-1 mt-10 overflow-hidden">
+                        <div class="relative z-10 max-w-xl p-7 sm:p-10 lg:p-12">
+                            <p class="section-kicker">Segera hadir</p>
+                            <h3 class="section-title mt-3">Layanan baru sedang kami siapkan</h3>
+                            <p class="mt-4 max-w-lg leading-7 text-patungan-grey">Kami sedang menyiapkan pilihan langganan berikutnya. Ikuti kabar terbaru agar kamu tahu saat layanan tersedia.</p>
+                            <a href="https://www.instagram.com/split.thebill" target="_blank" rel="noopener noreferrer" class="btn-secondary mt-7 w-full sm:w-auto">
+                                Ikuti kabar terbaru <span aria-hidden="true">↗</span>
+                            </a>
                         </div>
-                        <h3 class="mt-5 text-xl font-bold">Layanan sedang disiapkan</h3>
-                        <p class="mt-2 max-w-lg leading-7 text-patungan-grey">Layanan baru sedang kami siapkan. Silakan kembali lagi dalam waktu dekat.</p>
+                        <div class="empty-products-art" aria-hidden="true">
+                            <div class="empty-products-art__ring">
+                                <div class="empty-products-art__icon">
+                                    <img src="{{ asset('assets/images/icons/receipt-text-orange.svg') }}" class="h-12 w-12" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @else
                     <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -164,7 +178,10 @@
                     <a href="#Products" class="btn-primary mt-8 w-full sm:w-auto">Mulai Pilih Layanan</a>
                 </div>
 
-                <div class="grid gap-6">
+                <div class="steps-timeline relative grid gap-6" data-steps-track>
+                    <div class="steps-timeline__rail" aria-hidden="true">
+                        <span class="steps-timeline__progress" data-steps-progress></span>
+                    </div>
                     @foreach ($steps as $step)
                         <article class="surface-card motion-card step-card reveal-on-scroll grid overflow-hidden sm:grid-cols-[1fr_220px]">
                             <div class="p-6 sm:p-8">
@@ -173,7 +190,7 @@
                                 <p class="mt-3 leading-7 text-patungan-grey">{{ $step['description'] }}</p>
                             </div>
                             <div class="h-52 overflow-hidden bg-patungan-bg-grey sm:h-full sm:min-h-64">
-                                <img src="{{ asset($step['image']) }}" class="step-card__image h-full w-full object-cover object-top" alt="Ilustrasi {{ strtolower($step['title']) }}">
+                                <img src="{{ asset($step['image']) }}" class="step-card__image h-full w-full object-contain p-4 sm:p-5" alt="Ilustrasi {{ strtolower($step['title']) }}">
                             </div>
                         </article>
                     @endforeach
@@ -193,9 +210,10 @@
                         </span>
                     @endforeach
                 </div>
-                <div class="surface-card media-well motion-card reveal-on-scroll reveal-delay-1 mx-auto mt-9 max-w-5xl overflow-hidden p-4 sm:p-8">
-                    <img src="{{ asset('assets/images/thumbnails/supported-payments.png') }}" class="motion-float mx-auto h-auto w-full object-contain" alt="Bank dan metode pembayaran yang didukung">
+                <div class="surface-card media-well motion-card reveal-on-scroll reveal-delay-1 mx-auto mt-9 max-w-5xl overflow-x-auto p-4 sm:p-8" role="region" aria-label="Metode pembayaran, geser untuk melihat gambar selengkapnya" tabindex="0">
+                    <img src="{{ asset('assets/images/thumbnails/supported-payments.png') }}" class="mx-auto h-auto w-[640px] max-w-none object-contain sm:w-full sm:max-w-full" alt="Bank dan metode pembayaran yang didukung">
                 </div>
+                <p class="mt-3 text-sm font-semibold text-patungan-grey sm:hidden">Geser gambar untuk melihat semua metode pembayaran →</p>
             </div>
         </section>
 
@@ -206,7 +224,7 @@
                     <h2 class="section-title mt-3">Pengalaman hemat yang terasa lebih sederhana</h2>
                 </div>
 
-                <div class="reveal-on-scroll reveal-delay-1 mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                <div class="testimonials-track reveal-on-scroll reveal-delay-1 mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="region" aria-label="Cerita pelanggan, geser untuk melihat testimoni lainnya" tabindex="0">
                     @foreach ($testimonials as $testimonial)
                         <figure class="surface-card motion-card testimonial-card flex h-full flex-col p-6 sm:p-7">
                             <div class="flex items-center gap-3">
